@@ -29,7 +29,6 @@
       neovim
       wget
       git
-      alacritty
     ];
   };
 
@@ -40,12 +39,12 @@
     jetbrains-mono
     font-awesome                            # Icons
     corefonts                               # MS
-    # (nerdfonts.override {                   # Nerdfont Icons override
-    #   fonts = [
-    #     "FiraCode"
-    #   ];
-    # })
-    fira-code
+    (nerdfonts.override {                   # Nerdfont Icons override
+      fonts = [
+        "FiraCode"
+      ];
+    })
+    # fira-code
   ];
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.

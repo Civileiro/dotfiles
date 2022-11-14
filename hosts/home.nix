@@ -12,6 +12,15 @@
       kate
       vscode-fhs
       discord
+      btop
+      alacritty
+      jetbrains.idea-community
+      jetbrains.pycharm-community
+      (python3.withPackages (py-packages: with py-packages; [
+        pandas
+        numpy
+      ]))
+      rustup
     ];
 
     # This value determines the Home Manager release that your
@@ -25,7 +34,17 @@
     stateVersion = "22.05";
   };
 
-
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
+  programs = {
+    home-manager.enable = true;
+    alacritty = {
+      enable = true;
+      settings = {
+        window.opacity = 0.9;
+        font = {
+          normal.family = "FiraCode Nerd Font";
+          size = 20;
+        };
+      };
+    };
+  };
 }

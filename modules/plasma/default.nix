@@ -32,6 +32,7 @@
   environment = {
     systemPackages = with pkgs.libsForQt5; [
       ark
+      filelight
     ];
   };
 }
