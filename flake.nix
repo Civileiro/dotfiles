@@ -22,21 +22,11 @@
     lib = nixpkgs.lib;
   in
   {
-    nixosConfigurations = {
-      desktop = lib.nixosSystem {
-        inherit system;
-        modules = [
-          ./configuration.nix
-          home-manager.nixosModules.home-manager {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.${user} = {
-              imports = [ ./users/civi/home.nix ];
-            };
-          }
-        ];
-      };
-    };
+    nixosConfigurations = (
+      import ./hosts {
+        inherit user system nixpkgs lib home-manager;
+      }
+    );
 
   };
 }
