@@ -29,6 +29,7 @@
       neovim
       wget
       git
+      neofetch
     ];
   };
 
