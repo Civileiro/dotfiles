@@ -2,7 +2,8 @@
 {
   imports = [
     (import ./hardware-configuration.nix)
-    (import ../../modules/plasma)
+    (import ../../modules/desktop/plasma)
+    (import ../../modules/shell/bash)
   ];
 
   boot = {
