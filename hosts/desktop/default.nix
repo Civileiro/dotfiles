@@ -4,6 +4,7 @@
     (import ./hardware-configuration.nix)
     (import ../../modules/desktop/plasma)
     (import ../../modules/shell/bash)
+    (import ../../modules/etc/virt-manager)
   ];
 
   boot = {
