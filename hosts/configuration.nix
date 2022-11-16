@@ -58,6 +58,22 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
+    loader = {
+      systemd-boot = {
+        enable = true;
+        configurationLimit = 5;
+      };
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot/efi";
+      };
+      timeout = 1; 
+    };
+    supportedFilesystems = [ "ntfs" ];
+  };
+
   # Set your time zone.
   time.timeZone = "America/Sao_Paulo";
 

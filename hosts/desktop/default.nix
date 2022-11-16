@@ -7,20 +7,6 @@
     (import ../../modules/etc/virt-manager)
   ];
 
-  boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
-    loader = {
-      systemd-boot = {
-        enable = true;
-        configurationLimit = 5;
-      };
-      efi = {
-        canTouchEfiVariables = true;
-        efiSysMountPoint = "/boot/efi";
-      };
-      timeout = 1; 
-    };
-  };
   networking.hostName = "${user}-nixos-desktop";
 
   nixpkgs.overlays = [
