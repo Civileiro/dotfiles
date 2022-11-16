@@ -11,7 +11,7 @@
     isNormalUser = true;
     description = user;
     home = "/home/${user}";
-    extraGroups = [ "networkmanager" "wheel" "video" "audio" "kvm" "libvirtd" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "audio" ];
   };
 
   # # Bootloader.
