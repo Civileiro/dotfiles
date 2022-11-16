@@ -10,6 +10,7 @@
   users.users.${user} = {
     isNormalUser = true;
     description = user;
+    home = "/home/${user}";
     extraGroups = [ "networkmanager" "wheel" "video" "audio" "kvm" "libvirtd" ];
   };
 

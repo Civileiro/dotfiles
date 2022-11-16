@@ -2,7 +2,7 @@
 
 {
   imports = [
-
+    (import ../modules/editor/neovim)
   ];
   home = {
     # Home Manager needs a bit of information about you and the
@@ -13,7 +13,7 @@
     packages = with pkgs; [
       firefox
       kate
-      vscode-fhs
+      vscode
       discord
       btop
       alacritty
@@ -24,6 +24,7 @@
         numpy
       ]))
       rustup
+      krita
     ];
 
     # This value determines the Home Manager release that your
