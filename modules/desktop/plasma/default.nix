@@ -11,7 +11,10 @@
     enable = true;
     layout = "br";
     xkbVariant = "";
-    displayManager.sddm.enable = true;
+    displayManager.sddm = {
+      enable = true;
+      autoNumlock = true;
+    };
     desktopManager.plasma5 = {
       enable = true;
       excludePackages = with pkgs.libsForQt5; [
