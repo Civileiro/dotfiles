@@ -13,6 +13,7 @@
     packages = with pkgs; [
       firefox
       kate
+      vlc
       vscode
       discord
       btop
