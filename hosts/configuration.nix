@@ -20,6 +20,7 @@
       neovim
       wget
       git
+      gh
       neofetch
     ];
   };
