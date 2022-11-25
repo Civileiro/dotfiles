@@ -26,11 +26,7 @@
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         home-manager.extraSpecialArgs = { inherit user; };
-<<<<<<< HEAD
-        home-manager.user.${user} = {
-=======
         home-manager.users.${user} = {
->>>>>>> cd4dd52 (added laptop host)
           imports = [ ./home.nix ];
         };
       }
