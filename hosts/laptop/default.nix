@@ -8,7 +8,8 @@
     (import ../../modules/dev/docker)
   ];
 
-  networking.hostName = "${user}-nixos-desktop";
+  networking.hostName = "${user}-nixos-laptop";
+  
 
   nixpkgs.overlays = [
     (self: super: {

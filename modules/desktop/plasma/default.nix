@@ -29,7 +29,12 @@
         # print-manager
       ];
     };
-    videoDrivers = drivers; 
+    videoDrivers = drivers;
+
+    libinput = {
+      mouse.naturalScrolling = false;
+      touchpad.naturalScrolling = true;
+    };
 
   };
 
