@@ -1,5 +1,6 @@
 
-{pkgs, ...}:
+{ drivers, ... }:
+{ pkgs, ... }:
 {
 
   hardware.opengl.enable = true;
@@ -28,7 +29,7 @@
         # print-manager
       ];
     };
-    videoDrivers = [ "nvidia" ]; 
+    videoDrivers = drivers; 
 
   };
 
