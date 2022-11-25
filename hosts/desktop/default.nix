@@ -2,9 +2,10 @@
 {
   imports = [
     (import ./hardware-configuration.nix)
-    (import ../../modules/desktop/plasma) { drivers = [ "nvidia" ]; }
+    ((import ../../modules/desktop/plasma) { drivers = [ "nvidia" ]; })
     (import ../../modules/shell/bash)
     (import ../../modules/etc/virt-manager)
+    ((import ../..modules/terminal/alaacritty) { font-size = 20; })
   ];
 
   networking.hostName = "${user}-nixos-desktop";

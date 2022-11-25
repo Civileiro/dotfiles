@@ -40,18 +40,4 @@
     # changes in each release.
     stateVersion = "22.05";
   };
-
-  programs = {
-    home-manager.enable = true;
-    alacritty = {
-      enable = true;
-      settings = {
-        window.opacity = 0.9;
-        font = {
-          normal.family = "FiraCode Nerd Font";
-          size = 20;
-        };
-      };
-    };
-  };
 }
