@@ -11,7 +11,7 @@
         home-manager.useUserPackages = true;
         home-manager.extraSpecialArgs = { inherit user; };
         home-manager.users.${user} = {
-          imports = [ ./home.nix ];
+          imports = [ ./home.nix ./desktop/home.nix ];
         };
       }
     ];
@@ -27,7 +27,7 @@
         home-manager.useUserPackages = true;
         home-manager.extraSpecialArgs = { inherit user; };
         home-manager.users.${user} = {
-          imports = [ ./home.nix ];
+          imports = [ ./home.nix ./laptop/home.nix ];
         };
       }
     ];

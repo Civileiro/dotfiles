@@ -5,7 +5,6 @@
     ((import ../../modules/desktop/plasma) { drivers = [ "amdgpu" ]; })
     (import ../../modules/shell/bash)
     #(import ../../modules/etc/virt-manager)
-    ((import ../..modules/terminal/alacritty) { font-size = 16; })
   ];
 
   networking.hostName = "${user}-nixos-desktop";
