@@ -26,6 +26,8 @@
       ]))
       rustup
       krita
+      libreoffice-qt
+      hunspell
     ];
 
     # This value determines the Home Manager release that your
