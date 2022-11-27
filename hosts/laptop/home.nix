@@ -1,6 +1,6 @@
 { pkgs, ...}:
 {
   imports = [
-    ((import ../../modules/terminal/alacritty) { font-size = 16; })
+    ((import ../../home-modules/terminal/alacritty) { font-size = 16; })
   ];
 }

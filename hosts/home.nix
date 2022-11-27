@@ -2,7 +2,7 @@
 
 {
   imports = [
-    (import ../modules/editor/neovim)
+    (import ../home-modules/editor/neovim)
   ];
   home = {
     # Home Manager needs a bit of information about you and the
