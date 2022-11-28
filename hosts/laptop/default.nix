@@ -9,6 +9,7 @@
   ];
 
   networking.hostName = "${user}-nixos-laptop";
+  hardware.bluetooth.enable = true;
   
 
   nixpkgs.overlays = [
