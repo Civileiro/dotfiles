@@ -1,4 +1,8 @@
-{ pkgs ? import <nixpkgs> { } 
+{ pkgs ? import <nixpkgs> { 
+  config = {
+    allowUnfree = true;
+  };
+} 
 }:
 pkgs.mkShell {
   nativeBuildInputs = with pkgs; [
@@ -6,5 +10,6 @@ pkgs.mkShell {
     kubectl
     dbeaver
     lens
+    google-chrome
   ];
 }
