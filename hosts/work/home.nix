@@ -6,5 +6,6 @@
     dbeaver
     lens
     google-chrome
+    openvpn
   ];
 }
