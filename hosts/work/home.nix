@@ -7,5 +7,6 @@
     lens
     google-chrome
     openvpn
+    insomnia
   ];
 }
