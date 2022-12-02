@@ -28,6 +28,7 @@
       krita
       libreoffice-qt
       hunspell
+      nomacs
     ];
 
     # This value determines the Home Manager release that your
