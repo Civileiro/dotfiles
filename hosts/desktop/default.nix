@@ -10,6 +10,7 @@
   ];
 
   networking.hostName = "${user}-nixos-desktop";
+  services.xserver.wacom.enable = true;
 
   nixpkgs.overlays = [
 
