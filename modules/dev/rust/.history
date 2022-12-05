@@ -1,3 +1,5 @@
 cargo run
 cargo run
 exit
+cargo test
+cargo test
