@@ -39,10 +39,11 @@
   };
 
   environment = {
-    systemPackages = with pkgs.libsForQt5; [
-      ark
-      filelight
-      ffmpegthumbs
+    systemPackages = with pkgs; [
+      libsForQt5.ark
+      libsForQt5.filelight
+      libsForQt5.ffmpegthumbs
+      wineWowPackages.stable
     ];
   };
 }
