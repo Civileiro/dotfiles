@@ -7,7 +7,6 @@
     lens
     google-chrome
     openvpn
-    # update-systemd-resolved
     insomnia
   ];
 }
