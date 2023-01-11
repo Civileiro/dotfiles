@@ -8,5 +8,6 @@
     google-chrome
     openvpn
     insomnia
+    redis
   ];
 }
