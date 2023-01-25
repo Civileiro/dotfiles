@@ -18,8 +18,8 @@
       discord
       btop
       alacritty
-      jetbrains.idea-community
-      jetbrains.pycharm-community
+      # jetbrains.idea-community
+      # jetbrains.pycharm-community
       (python3.withPackages (py-packages: with py-packages; [
         pandas
         numpy
