@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    chromium
+    google-chrome
     wireshark
   ];
 }

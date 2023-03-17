@@ -7,6 +7,7 @@
     (import ../../modules/shell/bash)
     (import ../../modules/etc/virt-manager)
     (import ../../modules/game/steam)
+    (import ../college)
   ];
 
   networking.hostName = "${user}-nixos-desktop";
