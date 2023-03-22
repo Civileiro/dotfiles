@@ -16,19 +16,7 @@
       enable = true;
       autoNumlock = true;
     };
-    desktopManager.plasma5 = {
-      enable = true;
-      excludePackages = with pkgs.libsForQt5; [
-        elisa
-        gwenview
-        okular
-        # oxygen
-        khelpcenter
-        konsole
-        # plasma-browser-integration
-        # print-manager
-      ];
-    };
+    desktopManager.plasma5.enable = true;
     videoDrivers = drivers;
 
     libinput = {
@@ -45,5 +33,17 @@
       libsForQt5.ffmpegthumbs
       wineWowPackages.stable
     ];
+    plasma5 = {
+      excludePackages = with pkgs.libsForQt5; [
+        elisa
+        gwenview
+        okular
+        # oxygen
+        khelpcenter
+        konsole
+        # plasma-browser-integration
+        # print-manager
+      ];
+    };
   };
 }
