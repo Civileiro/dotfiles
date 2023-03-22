@@ -16,7 +16,7 @@
       vlc
       vscode
       discord
-      bottom
+      btop
       alacritty
       # jetbrains.idea-community
       # jetbrains.pycharm-community
