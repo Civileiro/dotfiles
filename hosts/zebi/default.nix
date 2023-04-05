@@ -10,6 +10,7 @@
   modules = {
     shell = {
       nu.enable = true;
+      git.enable = true;
       utils = {
         file.enable = true;
         btop.enable = true;
