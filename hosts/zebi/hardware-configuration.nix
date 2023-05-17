@@ -19,6 +19,10 @@
       nvidia.enable = true;
       wacom.enable = true;
       fs.enable = true;
+      drivers = {
+        enable = true;
+        rtl8821au.enable = true;
+      };
     };
   };
 
