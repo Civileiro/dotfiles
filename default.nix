@@ -1,6 +1,8 @@
 { inputs, self, config, lib, pkgs, ... }:
-
-{
+let
+  base = "/etc/nixpkgs/channels";
+  nixpkgsPath = "${base}/nixpkgs";
+in {
   imports = 
       # I use home-manager to deploy files to $HOME; little else
     [ inputs.home-manager.nixosModules.home-manager ]
@@ -58,11 +60,23 @@
   };
 
   nix = {
+    package = pkgs.nixFlakes;
+
+    registry.nixpkgs.flake = inputs.nixpkgs;
+
+    nixPath = [ 
+      "nixpkgs=${nixpkgsPath}"
+      "/nix/var/nix/profiles/per-user/root/channels"
+    ];
     settings = {
       auto-optimise-store = true;
       experimental-features = [ "nix-command" "flakes" ];
     };
   };
+
+  systemd.tmpfiles.rules = [
+    "L+ ${nixpkgsPath}     - - - - ${inputs.nixpkgs}"
+  ];
 
   # make a file with the name of all installed packages
   environment.etc."current-system-packages".text = 
