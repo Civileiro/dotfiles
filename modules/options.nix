@@ -1,11 +1,11 @@
-{ root, config, options, lib, ... }:
+{ self, config, options, lib, ... }:
 with lib;
 {
   options = with types; {
     user = my.mkOpt attrs {};
 
     dotfiles = {
-      dir = my.mkOpt path root;
+      dir        = my.mkOpt path self.root;
       binDir     = my.mkOpt path "${config.dotfiles.dir}/bin";
       configDir  = my.mkOpt path "${config.dotfiles.dir}/config";
       modulesDir = my.mkOpt path "${config.dotfiles.dir}/modules";
@@ -33,8 +33,10 @@ with lib;
   config = {
     user =
       let
-        user = builtins.getEnv "USER";
-        name = if elem user [ "" "root" ] then "civi" else user;
+        name = 
+          assert lib.assertMsg (!elem self.user [ "" "root" ])
+            "user cannot be empty or root";
+          self.user;
       in {
         inherit name;
         description = name;

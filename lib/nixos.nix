@@ -1,16 +1,16 @@
-{ inputs, self, system, root, lib, pkgs, ... }:
+{ inputs, self, system, lib, pkgs, ... }:
 {
   mkHost = hostPath:
     lib.nixosSystem {
       inherit system;
-      specialArgs = { inherit root inputs self lib; };
+      specialArgs = { inherit inputs self lib; };
       modules = [
         {
           nixpkgs.pkgs = pkgs;
           networking.hostName = lib.mkDefault (lib.removeSuffix ".nix" (builtins.baseNameOf hostPath));
         }
         hostPath
-        root # default.nix
+        self.root # can't directly access root ( ../. fails )
       ];
     };
 }
