@@ -10,13 +10,17 @@ let
 in {
   options.modules.shell.git = {
     enable = mkEnableOption "git";
-    gh = my.mkBoolOpt true;
   };
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
       git
-      (mkIf cfg.gh gh)
+      gh
     ];
+
+    home.configFile = {
+      "git" = { source = "${config.dotfiles.configDir}/git"; recursive = true; };
+    };
+    
   };
 }

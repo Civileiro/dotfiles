@@ -1,0 +1,8 @@
+# Caches
+__pycache__/
+
+# Compilation results
+*.class
+*.exe
+*.o
+*.pyc
