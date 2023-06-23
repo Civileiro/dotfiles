@@ -16,7 +16,6 @@ in {
       awscli
       kubectl
       dbeaver
-      lens
       google-chrome
       openvpn
       insomnia
