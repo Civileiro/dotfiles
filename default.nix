@@ -16,6 +16,8 @@ in {
       git
       neofetch # this is 100% always necessary trust me
       unzip
+      ripgrep
+      file
     ];
   };
 
