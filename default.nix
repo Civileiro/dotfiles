@@ -4,7 +4,6 @@ let
   nixpkgsPath = "${base}/nixpkgs";
 in {
   imports = 
-      # I use home-manager to deploy files to $HOME; little else
     [ inputs.home-manager.nixosModules.home-manager ]
     # All my personal modules
     ++ ( lib.my.mapModulesRec' import ./modules );
@@ -79,10 +78,11 @@ in {
   ];
 
   # make a file with the name of all installed packages
-  environment.etc."current-system-packages".text = 
+  environment.etc."current-packages".text = 
     with builtins; let
-      packages = map (p: "${p.name}") config.environment.systemPackages;
-      sortedUnique = sort lessThan (lib.unique packages);
+      packages = config.environment.systemPackages ++ config.users.users.${config.user.name}.packages;
+      packageNames = map (p: "${p.name}") packages;
+      sortedUnique = sort lessThan (lib.unique packageNames);
       formatted = concatStringsSep "\n" sortedUnique;
     in formatted;
   
