@@ -22,6 +22,10 @@ in {
       }
     ];
 
+    environment.systemPackages = with pkgs; [
+      xclip
+    ];
+
     fonts = {
       fontDir.enable = true;
       enableGhostscriptFonts = true;
