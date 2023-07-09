@@ -12,7 +12,6 @@
       nu.enable = true;
       git.enable = true;
       utils = {
-        file.enable = true;
         btop.enable = true;
       };
     };
@@ -63,6 +62,7 @@
       rust.enable = true;
       python.enable = true;
       cc.enable = true;
+      nix.enable = true;
     };
 
 
