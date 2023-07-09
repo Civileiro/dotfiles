@@ -23,6 +23,7 @@ in {
         };
         window = {
           opacity = 0.9;
+          dynamic_padding = true;
         };
       };
     };
