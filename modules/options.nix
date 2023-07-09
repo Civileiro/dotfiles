@@ -2,8 +2,10 @@
 with lib;
 {
   options = with types; {
+    # Alias for users.users.${config.user.name}
     user = my.mkOpt attrs {};
 
+    # Aliases for dotfiles directories
     dotfiles = {
       dir        = my.mkOpt path self.root;
       binDir     = my.mkOpt path "${config.dotfiles.dir}/bin";
@@ -12,12 +14,12 @@ with lib;
       themesDir  = my.mkOpt path "${config.dotfiles.modulesDir}/themes";
     };
 
+    # Aliases for common directories
     home = {
       file       = my.mkOpt' attrs {} "Files to place directly in $HOME";
       configFile = my.mkOpt' attrs {} "Files to place in $XDG_CONFIG_HOME";
       dataFile   = my.mkOpt' attrs {} "Files to place in $XDG_DATA_HOME";
     };
-
 
     env = mkOption {
       type = attrsOf (oneOf [ str path (listOf (either str path)) ]);
@@ -28,6 +30,9 @@ with lib;
       default = {};
       description = "TODO";
     };
+
+    # Attrs to be passed on to home-manager
+    hmConfig = my.mkOpt attrs {};
   };
 
   config = {
@@ -46,27 +51,27 @@ with lib;
         uid = 1000;
       };
     home-manager = {
-        useGlobalPkgs = true;
-        useUserPackages = true;
+      useGlobalPkgs = true;
+      useUserPackages = true;
 
-        #   home.file        ->  home-manager.users.civi.home.file
-        #   home.configFile  ->  home-manager.users.civi.xdg.configFile
-        #   home.dataFile    ->  home-manager.users.civi.xdg.dataFile
+      #   home.file        ->  home-manager.users.civi.home.file
+      #   home.configFile  ->  home-manager.users.civi.xdg.configFile
+      #   home.dataFile    ->  home-manager.users.civi.xdg.dataFile
 
-        users.${config.user.name} = {
-          home = {
-            username = config.user.name;
-            homeDirectory = config.user.home;
-            file = lib.mkAliasDefinitions options.home.file;
-            # Necessary for home-manager to work with flakes, otherwise it will
-            # look for a nixpkgs channel.
-            stateVersion = config.system.stateVersion;
-          };
-          xdg = {
-            configFile = mkAliasDefinitions options.home.configFile;
-            dataFile   = mkAliasDefinitions options.home.dataFile;
-          };
+      users.${config.user.name} = {
+        home = {
+          username = config.user.name;
+          homeDirectory = config.user.home;
+          file = lib.mkAliasDefinitions options.home.file;
+          # Necessary for home-manager to work with flakes, otherwise it will
+          # look for a nixpkgs channel.
+          stateVersion = config.system.stateVersion;
         };
+        xdg = {
+          configFile = mkAliasDefinitions options.home.configFile;
+          dataFile   = mkAliasDefinitions options.home.dataFile;
+        };
+      } // config.hmConfig;
     };
 
     users.users.${config.user.name} = mkAliasDefinitions options.user;
