@@ -179,7 +179,7 @@ let-env config = {
     clickable_links: true # enable or disable clickable links. Your terminal has to support links.
   }
   rm: {
-    always_trash: false # always act as if -t was given. Can be overridden with -p
+    always_trash: true # always act as if -t was given. Can be overridden with -p
   }
   cd: {
     abbreviations: false # allows `cd s/o/f` to expand to `cd some/other/folder`
@@ -304,9 +304,9 @@ let-env config = {
     display_output: {||
       if (term size).columns >= 100 { table -e } else { table }
     }
-    #command_not_found: {||
-    #  null  # replace with source code to return an error message when a command is not found
-    #}
+    command_not_found: {|cmd_name|
+      command-not-found $cmd_name
+    }
   }
   menus: [
       # Configuration for default nushell menus

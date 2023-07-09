@@ -2,17 +2,17 @@
 
 def create_left_prompt [] {
     let path = if ($env.PWD | str starts-with $env.HOME) {
-	$"~($env.PWD | str substring ($env.HOME | str length)..)"
+	    "~" + ($env.PWD | str substring ($env.HOME | str length)..)
     } else {
-	$env.PWD
+	    $env.PWD
     }
     let path_segment = if (is-admin) {
-        $"(ansi red_bold)($path)"
+        (ansi red_bold) + $path
     } else {
-        $"(ansi green_bold)($path)"
+        (ansi green_bold) + $path
     }
 
-    $path_segment
+    $" ($path_segment)\n "
 }
 
 let-env STARSHIP_SHELL = "nu"
