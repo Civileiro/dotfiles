@@ -9,10 +9,16 @@ in {
   };
 
   config = mkIf cfg.enable {
-    hardware.opengl = {
-      enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
+    hardware = {
+      nvidia = {
+        modesetting.enable = true;
+        forceFullCompositionPipeline = true;
+      };
+      opengl = {
+        enable = true;
+        driSupport = true;
+        driSupport32Bit = true;
+      };
     };
 
     services.xserver.videoDrivers = [ "nvidia" ];
