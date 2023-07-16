@@ -1,9 +1,11 @@
 { config, lib, pkgs, ... }:
 
 with lib;
-let cfg = config.modules.desktop;
+let 
+  cfg = config.modules.desktop;
+  x = config.services.xserver.enable;
 in {
-  config = mkIf config.services.xserver.enable {
+  config = mkIf x {
     assertions = [
       {
         assertion = (my.countAttrs (n: v: n == "enable" && value) cfg) < 2;
@@ -21,6 +23,15 @@ in {
         message = "Can't enable a desktop app without a desktop environment";
       }
     ];
+
+    services.xserver = {
+      layout = "br";
+      xkbVariant = "";
+      libinput = {
+        mouse.naturalScrolling = false;
+        touchpad.naturalScrolling = true;
+      };
+    };
 
     environment.systemPackages = with pkgs; [
       xclip

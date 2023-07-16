@@ -11,18 +11,11 @@ in {
   config = mkIf cfg.enable {
     services.xserver = {
       enable = true;
-      layout = "br";
-      xkbVariant = "";
       displayManager.sddm = {
         enable = true;
         autoNumlock = true;
       };
       desktopManager.plasma5.enable = true;
-
-      libinput = {
-        mouse.naturalScrolling = false;
-        touchpad.naturalScrolling = true;
-      };
 
     };
 
@@ -32,6 +25,8 @@ in {
         libsForQt5.filelight
         libsForQt5.ffmpegthumbs
         wineWowPackages.stable
+        (catppuccin-kde.override { flavour = ["frappe"]; accents = ["teal"]; winDecStyles = ["modern"]; })
+        catppuccin-gtk
       ];
       plasma5 = {
         excludePackages = with pkgs.libsForQt5; [
