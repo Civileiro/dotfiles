@@ -18,7 +18,7 @@ in {
       gh
     ];
 
-    home.configFile = {
+    home.config.file = {
       "git" = { source = "${config.dotfiles.configDir}/git"; recursive = true; };
     };
     

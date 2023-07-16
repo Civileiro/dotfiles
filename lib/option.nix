@@ -1,6 +1,6 @@
 { lib, ... }:
 let
-  inherit (lib) mkOption types;
+  inherit (lib) mkOption types const;
 in
 {
   mkOpt  = type: default:
@@ -8,6 +8,12 @@ in
 
   mkOpt' = type: default: description:
     mkOption { inherit type default description; };
+
+  mkConst = type: value: mkOption {
+    inherit type;
+    default = value;
+    apply = const value;
+  };
 
   mkBoolOpt = default: 
     mkOption {

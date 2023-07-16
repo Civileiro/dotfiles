@@ -20,7 +20,7 @@ in
       shell = pkgs.nushell;
     };
 
-    home.configFile = {
+    home.config.file = {
       "nushell" = { source = "${configDir}/nu"; recursive = true; };
     };
   };

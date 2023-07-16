@@ -1,0 +1,5 @@
+window:
+  dynamic_padding: true
+  opacity: 0.85
+env:
+  TERM: xterm-256color

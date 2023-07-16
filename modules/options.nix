@@ -16,9 +16,16 @@ with lib;
 
     # Aliases for common directories
     home = {
-      file       = my.mkOpt' attrs {} "Files to place directly in $HOME";
-      configFile = my.mkOpt' attrs {} "Files to place in $XDG_CONFIG_HOME";
-      dataFile   = my.mkOpt' attrs {} "Files to place in $XDG_DATA_HOME";
+      file   = my.mkOpt' attrs {} "Files to place directly in $HOME";
+      path   = my.mkConst str config.user.home;
+      config = {
+        file = my.mkOpt' attrs {} "Files to place in $XDG_CONFIG_HOME";
+        path = my.mkConst str config.home-manager.users.${config.user.name}.xdg.configHome;
+      };
+      data = {
+        file = my.mkOpt' attrs {} "Files to place in $XDG_DATA_HOME";
+        path = my.mkConst str config.home-manager.users.${config.user.name}.xdg.dataHome;
+      };
     };
 
     env = mkOption {
@@ -28,11 +35,11 @@ with lib;
                then concatMapStringsSep ":" toString v
                else (toString v));
       default = {};
-      description = "TODO";
+      description = "System environment variables";
     };
 
-    # Attrs to be passed on to home-manager
-    hmConfig = my.mkOpt attrs {};
+    # Modules to be imported by home-manager
+    hmModules = my.mkOpt (listOf anything) [];
   };
 
   config = {
@@ -55,8 +62,8 @@ with lib;
       useUserPackages = true;
 
       #   home.file        ->  home-manager.users.civi.home.file
-      #   home.configFile  ->  home-manager.users.civi.xdg.configFile
-      #   home.dataFile    ->  home-manager.users.civi.xdg.dataFile
+      #   home.config.file  ->  home-manager.users.civi.xdg.configFile
+      #   home.data.file    ->  home-manager.users.civi.xdg.dataFile
 
       users.${config.user.name} = {
         home = {
@@ -68,10 +75,11 @@ with lib;
           stateVersion = config.system.stateVersion;
         };
         xdg = {
-          configFile = mkAliasDefinitions options.home.configFile;
-          dataFile   = mkAliasDefinitions options.home.dataFile;
+          configFile = mkAliasDefinitions options.home.config.file;
+          dataFile   = mkAliasDefinitions options.home.data.file;
         };
-      } // config.hmConfig;
+        imports = config.hmModules;
+      };
     };
 
     users.users.${config.user.name} = mkAliasDefinitions options.user;
