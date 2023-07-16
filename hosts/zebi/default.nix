@@ -16,17 +16,26 @@
         btop.enable = true;
       };
     };
+    editors = {
+      default = "nvim";
+      nvim.enable = true;
+    };
+    dev = {
+      xdg.enable = true;
+      rust.enable = true;
+      python.enable = true;
+      cc.enable = true;
+      nix.enable = true;
+    };
     services = {
       docker.enable = true;
       transmission.enable = true;
-      tpm.enable = true;
       networkmanager.enable = true;
     };
     desktop = {
       plasma.enable = true;
       apps = {
         discord.enable = true;
-        wireshark.enable = true;
         vscode.enable = true;
       };
       browsers = {
@@ -50,22 +59,10 @@
         default = "alacritty";
         alacritty = {
           enable = true;
-          fontsize = 20;
+          fontsize = 16;
         };
       };
     };
-    editors = {
-      default = "nvim";
-      nvim.enable = true;
-    };
-    dev = {
-      xdg.enable = true;
-      rust.enable = true;
-      python.enable = true;
-      cc.enable = true;
-      nix.enable = true;
-    };
-
 
     packs.work.enable = true;
   };
