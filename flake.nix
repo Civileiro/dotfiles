@@ -2,18 +2,20 @@
   description = "Civi's flake";
 
   inputs = {
-
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    fenix = {
+      # Rust toolchain manager
+      url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs @ { self, nixpkgs, ... }:
+  outputs = inputs @ { self, nixpkgs, fenix, ... }:
     let
-
       system = "x86_64-linux";
 
       makePkgs = pkgs: overlays: import pkgs {
@@ -29,7 +31,7 @@
       user = "civi";
       root = ./.;
 
-      overlays = lib.attrValues (lib.my.mapModules import ./overlays);
+      overlays = lib.attrValues (lib.my.mapModules import ./overlays) ++ [fenix.overlays.default];
 
       nixosModules = lib.my.mapModulesRec import ./modules;
 

@@ -7,12 +7,23 @@ let devCfg = config.modules.dev;
 in {
   options.modules.dev.rust = {
     enable = mkEnableOption "Rust";
+    components = mkOption {
+      type = with types; listOf str;
+      default = [];
+      description = "Rust components to be installed";
+    };
+    lsp.enable = my.mkBoolOpt false;
     xdg.enable = my.mkBoolOpt devCfg.xdg.enable;
   };
 
   config = mkIf cfg.enable (mkMerge [
     {
-      user.packages = [ pkgs.rustup ];
+      modules.dev.rust.components = let
+        # Always install the Rust compiler, standard library and cargo
+        base = [ "rustc" "rust-src" "cargo" ]; 
+        lsp = if cfg.lsp.enable then [ "rust-analyzer" "clippy" ] else [];
+        in unique (base ++ lsp);
+      user.packages = [( pkgs.fenix.stable.withComponents cfg.components )];
     }
     (mkIf cfg.xdg.enable {
       env.RUSTUP_HOME = "$XDG_DATA_HOME/rustup";
