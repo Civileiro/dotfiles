@@ -4,7 +4,10 @@ let
   nixpkgsPath = "${base}/nixpkgs";
 in {
   imports = 
-    [ inputs.home-manager.nixosModules.home-manager ]
+    [ 
+      inputs.home-manager.nixosModules.home-manager
+      inputs.hyprland.nixosModules.default
+    ]
     # All my personal modules
     ++ ( lib.my.mapModulesRec' import ./modules );
 
@@ -72,6 +75,10 @@ in {
     settings = {
       auto-optimise-store = true;
       experimental-features = [ "nix-command" "flakes" ];
+      substituters = [ "https://hyprland.cachix.org" ];
+      trusted-public-keys = [
+        "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+      ];
     };
   };
 
