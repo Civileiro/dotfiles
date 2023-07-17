@@ -19,7 +19,7 @@ in {
         plugins = with pkgs.vimPlugins; flatten [
           catppuccin-nvim # theme
           telescope-nvim # fuzzy finder
-          nvim-treesitter # syntax tree builder & highlighter
+          nvim-treesitter.withAllGrammars # syntax tree builder & highlighter
           harpoon # quick select menu
           undotree # access nvim's undo tree
           vim-fugitive # git integration
@@ -34,20 +34,8 @@ in {
           neo-tree-nvim # pretty file tree
           lualine-nvim # status
           lualine-lsp-progress # show lsp loading progress
-          (optional shellCfg.tmux.enable vim-tmux-navigator) # tmux integration
-        ] ++ (with nvim-treesitter-parsers; flatten [
-          nix lua bash # we always have these
-          toml json yaml markdown html # these are everywhere
-          (optional devCfg.cc.enable [c cpp make])
-          (optional devCfg.rust.enable rust)
-          (optional devCfg.python.enable python)
-          haskell
-          go
-          elixir
-          javascript
-          typescript
-          zig
-        ]);
+          (optional shellCfg.tmux.enable vim-tmux-navigator) # tmux integration 
+        ];
       };
     }];
     user.packages = with pkgs; [
