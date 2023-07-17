@@ -35,7 +35,7 @@ rec {
           then fn path
         else if pathExists "${path}/default.nix"
           then fn path
-          else _: null);
+          else null);
 
   # mapModules :: (dir -> a) -> dir -> [a]
   # Apply a function to every non-default module in a directory
