@@ -34,6 +34,11 @@ in {
           neo-tree-nvim # pretty file tree
           lualine-nvim # status
           lualine-lsp-progress # show lsp loading progress
+          nvim-notify # fancy notifications
+          guess-indent-nvim # automatic indentation detection
+          nvim-autopairs # autocomplete pairs ()[]{}""
+          indent-blankline-nvim # mark indentation levels
+          comment-nvim # autocomment lines/blocks
           (optional shellCfg.tmux.enable vim-tmux-navigator) # tmux integration 
         ];
       };
@@ -41,7 +46,7 @@ in {
     user.packages = with pkgs; [
       lua-language-server
     ];
-    modules.dev.rust.lsp.enable = true;
+    modules.dev.lsp.enable = true;
     home.config.file = {
       "nvim" = { source = "${configDir}/nvim"; recursive = true; };
     };
