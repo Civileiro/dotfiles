@@ -11,23 +11,20 @@ let devCfg = config.modules.dev;
 in {
   options.modules.dev.cc = {
     enable = mkEnableOption "C/C++";
-    xdg.enable = mkBoolOpt devCfg.xdg.enable;
+    install = my.mkBoolOpt false;
+    lsp.enable = my.mkBoolOpt devCfg.lsp.enable;
   };
 
-  config = mkMerge [
-    (mkIf cfg.enable {
-      user.packages = with pkgs; [
-        clang
-        gcc
-        bear
-        gdb
-        cmake
-        llvmPackages.libcxx
-      ];
-    })
-
-    (mkIf cfg.xdg.enable {
-      # TODO
-    })
-  ];
+  config = mkIf cfg.enable {
+    user.packages = with pkgs; builtins.map (mkIf cfg.install) [
+      clang
+      gcc
+      bear
+      gdb
+      cmake
+      llvmPackages.libcxx
+    ] ++ [
+      (mkIf cfg.lsp.enable clang-tools)
+    ];
+  };
 }

@@ -7,12 +7,12 @@ let devCfg = config.modules.dev;
 in {
   options.modules.dev.nix = {
     enable = mkEnableOption "Nix Dev";
-    xdg.enable = mkBoolOpt devCfg.xdg.enable;
+    lsp.enable = my.mkBoolOpt devCfg.lsp.enable;
   };
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      nil # Nix LSP
+      (mkIf cfg.lsp.enable nil)
     ];
   };
 }

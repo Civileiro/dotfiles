@@ -7,14 +7,14 @@ let devCfg = config.modules.dev;
 in {
   options.modules.dev.python = {
     enable = mkEnableOption "Python";
-    xdg.enable = mkBoolOpt devCfg.xdg.enable;
+    install = my.mkBoolOpt true;
+    lsp.enable = my.mkBoolOpt devCfg.lsp.enable;
   };
 
-  config = mkMerge [
-    (mkIf cfg.enable {
-      user.packages = with pkgs; [
-        python3
-      ];
-    })
-  ];
+  config = mkIf cfg.enable {
+    user.packages = with pkgs; [
+      (mkIf cfg.install python3)
+      (mkIf cfg.lsp.enable nodePackages.pyright)
+    ];
+  };
 }

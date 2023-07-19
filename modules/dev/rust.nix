@@ -12,7 +12,7 @@ in {
       default = [];
       description = "Rust components to be installed";
     };
-    lsp.enable = my.mkBoolOpt false;
+    lsp.enable = my.mkBoolOpt devCfg.lsp.enable;
     xdg.enable = my.mkBoolOpt devCfg.xdg.enable;
   };
 
