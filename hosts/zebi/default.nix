@@ -36,7 +36,6 @@
       plasma.enable = true;
       apps = {
         discord.enable = true;
-        vscode.enable = true;
       };
       browsers = {
         default = "firefox";

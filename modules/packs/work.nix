@@ -20,6 +20,7 @@ in {
       openvpn
       insomnia
       redis
+      vscode
     ];
   };
 }
