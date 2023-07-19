@@ -13,28 +13,35 @@ cmp.setup({
   view = {
     entries = {
       name = "custom",
-      selection_order = "near_cursor",
     }
   },
   mapping = {
-    ["<C-Up>"] = cmp.mapping.select_prev_item(cmp_select_opts),
-    ["<C-Down>"] = cmp.mapping.select_next_item(cmp_select_opts),
-    ["<CR>"] = cmp.mapping.confirm(),
+    ["<C-Up>"] = cmp.mapping(
+      cmp.mapping.select_prev_item(cmp_select_opts),
+      { "i", "c" }
+    ),
+    ["<C-Down>"] = cmp.mapping(
+      cmp.mapping.select_next_item(cmp_select_opts),
+      { "i", "c" }
+    ),
+    ["<CR>"] = cmp.mapping(cmp.mapping.confirm(), { "i", "c" }),
+    ["<PageUp>"] = cmp.mapping.scroll_docs(-4),
+    ["<PageDown>"] = cmp.mapping.scroll_docs(4),
     ["<Tab>"] = cmp.mapping(function(fallback)
       local col = vim.fn.col(".") - 1
-           -- if completion is available, select the first one
+        -- if completion is available, select the first one
       if cmp.visible() then
         cmp.confirm({ select = true })
-           -- else if able to navigate snippet, do so
+        -- else if able to navigate snippet, do so
       elseif luasnip.expand_or_jumpable() then
         luasnip.expand_or_jump()
-           -- else if there nothing to complete, fallback
+        -- else if there nothing to complete, fallback
       elseif col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
         fallback()
       else -- else complete
         cmp.complete()
       end
-    end, {"i", "s"}),
+    end, {"i", "c", "s"}),
   },
   sources = cmp.config.sources({
     { name = "nvim_lsp" },
@@ -62,13 +69,11 @@ cmp.setup.filetype("gitcommit", {
   })
 })
 cmp.setup.cmdline({ '/', '?' }, {
-  mapping = cmp.mapping.preset.cmdline(),
   sources = {
     { name = 'buffer' }
   }
 })
 cmp.setup.cmdline(":", {
-  mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
     { name = 'path' },
   }, {
@@ -96,4 +101,22 @@ lspconfig["rust_analyzer"].setup({
       check = { command = "clippy", },
     },
   },
+})
+lspconfig["pyright"].setup({
+  capabilities = capabilities,
+})
+lspconfig["clangd"].setup({
+  capabilities = capabilities,
+})
+lspconfig["jdtls"].setup({
+  capabilities = capabilities,
+  -- nix calls it "jdt-language-server" instead of "jdtls"
+  cmd = {
+    "jdt-language-server",
+    "-configuration", "/home/user/.cache/jdtls/config",
+    "-data", "/home/user/.cache/jdtls/workspace"
+  },
+})
+lspconfig["nil_ls"].setup({
+  capabilities = capabilities,
 })
