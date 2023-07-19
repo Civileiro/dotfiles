@@ -4,8 +4,7 @@ let
   inherit (lib) id hasPrefix hasSuffix removeSuffix nameValuePair attrValues mapAttrs' filterAttrs collect;
 in
 rec {
-
-  # mapModulesByType :: (bool -> dir -> a) -> dir -> {a}
+  # mapNixFiles :: (bool -> dir -> a) -> dir -> {a}
   # Apply a function to every .nix file and sub-directory in a directory,
   # the function receives a boolean that represents if the file is regular,
   # files with a "_" prefix and null results are filtered
