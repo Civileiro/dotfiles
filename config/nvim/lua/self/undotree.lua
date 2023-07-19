@@ -1,2 +1,4 @@
 -- undotree.lua
-vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+vim.keymap.set("n", "<Leader>u", vim.cmd.UndotreeToggle, {
+  desc = "Toggle [U]ndotree"
+})
