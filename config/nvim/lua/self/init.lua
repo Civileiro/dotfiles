@@ -20,4 +20,5 @@ require("self.indent-blankline")
 require("self.autopairs")
 require("self.comment")
 require("self.gitsigns")
+require("self.toggleterm")
 

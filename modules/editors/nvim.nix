@@ -39,6 +39,7 @@ in {
           nvim-autopairs # autocomplete pairs ()[]{}""
           indent-blankline-nvim # mark indentation levels
           comment-nvim # autocomment lines/blocks
+          toggleterm-nvim # terminal in nvim pog
           (optional shellCfg.tmux.enable vim-tmux-navigator) # tmux integration 
         ];
       };
