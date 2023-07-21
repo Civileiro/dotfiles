@@ -22,7 +22,7 @@ in {
           nvim-treesitter.withAllGrammars # syntax tree builder & highlighter
           harpoon # quick select menu
           undotree # access nvim's undo tree
-          vim-fugitive # git integration
+          vim-fugitive gitsigns-nvim # git integration
           nvim-lspconfig # configuring LSP's
           nvim-cmp # auto completion engine
           cmp-buffer cmp-path cmp-cmdline cmp-git # completions sources
