@@ -21,7 +21,6 @@
       fs.enable = true;
       drivers = {
         enable = true;
-        rtl8821au.enable = true;
       };
     };
   };
