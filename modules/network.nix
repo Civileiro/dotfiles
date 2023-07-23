@@ -3,8 +3,8 @@
 with builtins;
 with lib;
 let blocklist = fetchurl {
-  url = https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts;
-  sha256 = "bad36e1c4cc3e6939e6d90791a2dc6e78905cb162338d0b8c1846361e710fe12";
+  url = "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts";
+  sha256 = "sha256:0lpvxgkg516dj6hqkr4pm5wzmfa2gmxlbmzr0zd61zks596n308x";
 };
 in {
   networking.extraHosts = ''
