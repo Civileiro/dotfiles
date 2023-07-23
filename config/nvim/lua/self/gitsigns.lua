@@ -2,7 +2,7 @@
 local gs = require("gitsigns")
 gs.setup({
   signs = {
-    add = { text = "x" },
+    add = { text = "+" },
     change = { text = "~" },
     delete = { text = "_" },
     topdelete = { text = "‾" },
