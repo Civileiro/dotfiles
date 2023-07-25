@@ -17,8 +17,6 @@ vim.keymap.set("v", "<M-Up>", ":m '<-2<CR>gv=gv")
 vim.keymap.set("v", "<M-Down>", ":m '>+1<CR>gv=gv")
 
 -- centralize cursor when jumping
-vim.keymap.set("n", "<PageUp>", "<C-u>zz")
-vim.keymap.set("n", "<PageDown>", "<C-d>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 

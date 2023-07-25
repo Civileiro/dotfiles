@@ -40,6 +40,8 @@ in {
           indent-blankline-nvim # mark indentation levels
           comment-nvim # autocomment lines/blocks
           toggleterm-nvim # terminal in nvim pog
+          neoscroll-nvim # smooth scrolling
+          nvim-scrollbar # fancy scrollbar
           (optional shellCfg.tmux.enable vim-tmux-navigator) # tmux integration 
         ];
       };

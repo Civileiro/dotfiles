@@ -21,4 +21,6 @@ require("self.autopairs")
 require("self.comment")
 require("self.gitsigns")
 require("self.toggleterm")
+require("self.neoscroll")
+require("self.scrollbar")
 
