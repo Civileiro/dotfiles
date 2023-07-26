@@ -24,6 +24,11 @@ in {
         lsp = if cfg.lsp.enable then [ "rust-analyzer" "clippy" ] else [];
         in unique (base ++ lsp);
       user.packages = [( pkgs.fenix.stable.withComponents cfg.components )];
+      # rust needs llvm
+      modules.dev.cc = {
+        enable = true;
+        install = true;
+      };
     }
     (mkIf cfg.xdg.enable {
       env.RUSTUP_HOME = "$XDG_DATA_HOME/rustup";
