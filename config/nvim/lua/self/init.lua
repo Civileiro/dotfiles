@@ -23,4 +23,5 @@ require("self.gitsigns")
 require("self.toggleterm")
 require("self.neoscroll")
 require("self.scrollbar")
+require("self.treesitter")
 
