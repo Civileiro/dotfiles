@@ -24,4 +24,5 @@ require("self.toggleterm")
 require("self.neoscroll")
 require("self.scrollbar")
 require("self.treesitter")
+require("self.trouble")
 
