@@ -58,7 +58,7 @@
         default = "alacritty";
         alacritty = {
           enable = true;
-          fontsize = 16;
+          fontsize = 14;
         };
       };
     };
