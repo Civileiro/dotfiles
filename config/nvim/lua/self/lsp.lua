@@ -1,8 +1,8 @@
 -- lsp.lua
 
 vim.diagnostic.config({
-  virtual_text = false,
-  signs = true,
+  virtual_text = true,
+  signs = false,
   update_in_insert = true,
   underline = true,
   severity_sort = false,
@@ -51,7 +51,23 @@ vim.api.nvim_create_autocmd("CursorHold", {
   desc = "Hover Diagnostics",
   group = grp,
   callback = function()
-    vim.diagnostic.open_float(nil, { focusable = false })
+    -- Do nothing if there's a floating window open
+    for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
+      if vim.api.nvim_win_get_config(winid).zindex then
+        return
+      end
+    end
+    vim.diagnostic.open_float(0, {
+      scope = "cursor",
+      focusable = false,
+      close_events = {
+        "CursorMoved",
+        "CursorMovedI",
+        "BufHidden",
+        "InsertCharPre",
+        "WinLeave",
+      },
+    })
   end
 })
 
