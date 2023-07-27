@@ -158,14 +158,6 @@ lspconfig["lua_ls"].setup({
     },
   },
 })
-lspconfig["rust_analyzer"].setup({
-  capabilities = capabilities,
-  settings = {
-    ["rust-analyzer"] = {
-      check = { command = "clippy", },
-    },
-  },
-})
 lspconfig["pyright"].setup({
   capabilities = capabilities,
 })
@@ -184,3 +176,17 @@ lspconfig["jdtls"].setup({
 lspconfig["nil_ls"].setup({
   capabilities = capabilities,
 })
+
+local has_rust, rt = pcall(require, "rust-tools")
+if has_rust then
+  rt.setup({
+    server = {
+      capabilities = capabilities,
+      settings = {
+        ["rust-analyzer"] = {
+          check = { command = "clippy", },
+        },
+      },
+    }
+  })
+end

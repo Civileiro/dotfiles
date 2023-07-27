@@ -44,6 +44,7 @@ in {
           toggleterm-nvim # terminal in nvim pog
           neoscroll-nvim # smooth scrolling
           nvim-scrollbar # fancy scrollbar
+          (optional devCfg.rust.enable rust-tools-nvim)
           (optional shellCfg.tmux.enable vim-tmux-navigator) # tmux integration 
         ];
       };
