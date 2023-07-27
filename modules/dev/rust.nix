@@ -20,7 +20,7 @@ in {
     {
       modules.dev.rust.components = let
         # Always install the Rust compiler, standard library and cargo
-        base = [ "rustc" "rust-src" "cargo" ]; 
+        base = [ "rustc" "rust-src" "cargo" "rustfmt" ]; 
         lsp = if cfg.lsp.enable then [ "rust-analyzer" "clippy" ] else [];
         in unique (base ++ lsp);
       user.packages = [( pkgs.fenix.stable.withComponents cfg.components )];
