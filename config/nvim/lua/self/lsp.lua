@@ -1,8 +1,22 @@
 -- lsp.lua
 
+vim.diagnostic.config({
+  virtual_text = false,
+  signs = true,
+  update_in_insert = true,
+  underline = true,
+  severity_sort = false,
+  float = {
+    border = "rounded",
+    source = "always",
+    header = "",
+    prefix = "",
+  },
+})
+local grp = vim.api.nvim_create_augroup("UserLspConfig", {})
 vim.api.nvim_create_autocmd("LspAttach", {
   desc = "LSP mappings",
-  group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+  group = grp,
   callback = function(event)
     local function map(mode, l, r, opts)
       opts = opts or {}
@@ -27,11 +41,20 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.lsp.buf.format({ async = true })
     end)
     map({ "n", "v" }, "<F4>", vim.lsp.buf.code_action)
-    map("n", "<Leader>.", vim.lsp.buf.hover)
+    map("n", "<Leader><Space>", vim.lsp.buf.hover)
     map("n", "[d", vim.diagnostic.goto_prev)
     map("n", "]d", vim.diagnostic.goto_next)
   end
 })
+
+vim.api.nvim_create_autocmd("CursorHold", {
+  desc = "Hover Diagnostics",
+  group = grp,
+  callback = function()
+    vim.diagnostic.open_float(nil, { focusable = false })
+  end
+})
+
 -- CMP setup
 local cmp = require("cmp")
 local cmp_select_opts = { behavior = cmp.SelectBehavior.Select }
@@ -76,8 +99,14 @@ cmp.setup({
       end
     end, {"i", "c", "s"}),
   },
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
+  },
   sources = cmp.config.sources({
     { name = "nvim_lsp" },
+    { name = "nvim_lsp_signature_help" },
+    { name = "nvim_lua" },
     { name = "luasnip" },
   }, {
     { name = "buffer" },

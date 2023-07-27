@@ -26,6 +26,8 @@ in {
           nvim-lspconfig # configuring LSP's
           nvim-cmp # auto completion engine
           cmp-buffer cmp-path cmp-cmdline cmp-git # completions sources
+          cmp-nvim-lua # nvim lua config completions
+          cmp-nvim-lsp-signature-help # display function signatures
           cmp-nvim-lsp # config cmp nvim lsp
           luasnip # snippet engine
           cmp_luasnip # luasnip completion source
