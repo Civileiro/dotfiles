@@ -1,14 +1,10 @@
-{ config, lib, ... }:
+{ lib, ... }:
 
-with lib;
-let cfg = config.modules.dev;
-in {
+with lib; {
   options.modules.dev = {
     lsp.enable = mkEnableOption "LSP";
+    formatter.enable = mkEnableOption "Formatters";
+    linter.enable = mkEnableOption "Linters";
     xdg.enable = mkEnableOption "XDG";
-  };
-
-  config = {
-    # TODO
   };
 }

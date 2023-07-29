@@ -44,6 +44,8 @@ in {
           toggleterm-nvim # terminal in nvim pog
           neoscroll-nvim # smooth scrolling
           nvim-scrollbar # fancy scrollbar
+          nvim-lint # support non-lsp diagnostics
+          formatter-nvim # integrate formatters
           (optional devCfg.rust.enable rust-tools-nvim)
           (optional shellCfg.tmux.enable vim-tmux-navigator) # tmux integration 
         ];
@@ -52,7 +54,12 @@ in {
     user.packages = with pkgs; [
       lua-language-server
     ];
-    modules.dev.lsp.enable = true;
+    # Turn on all our dev tools
+    modules.dev = {
+      lsp.enable = true;
+      formatter.enable = true;
+      linter.enable = true;
+    };
     home.config.file = {
       "nvim" = { source = "${configDir}/nvim"; recursive = true; };
     };

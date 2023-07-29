@@ -13,6 +13,8 @@ in {
       description = "Rust components to be installed";
     };
     lsp.enable = my.mkBoolOpt devCfg.lsp.enable;
+    formatter.enable = my.mkBoolOpt devCfg.formatter.enable;
+    linter.enable = my.mkBoolOpt devCfg.linter.enable;
     xdg.enable = my.mkBoolOpt devCfg.xdg.enable;
   };
 
@@ -20,9 +22,11 @@ in {
     {
       modules.dev.rust.components = let
         # Always install the Rust compiler, standard library and cargo
-        base = [ "rustc" "rust-src" "cargo" "rustfmt" ]; 
-        lsp = if cfg.lsp.enable then [ "rust-analyzer" "clippy" ] else [];
-        in unique (base ++ lsp);
+        base = [ "rustc" "rust-src" "cargo" ]; 
+        lsp = if cfg.lsp.enable then [ "rust-analyzer" ] else [];
+        formatter = if cfg.formatter.enable then [ "rustfmt" ] else [];
+        linter = if cfg.linter.enable then [ "clippy" ] else [];
+        in unique (base ++ lsp ++ formatter ++ linter);
       user.packages = [( pkgs.fenix.stable.withComponents cfg.components )];
       # rust needs llvm
       modules.dev.cc = {

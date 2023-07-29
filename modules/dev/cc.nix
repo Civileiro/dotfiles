@@ -13,6 +13,8 @@ in {
     enable = mkEnableOption "C/C++";
     install = my.mkBoolOpt false;
     lsp.enable = my.mkBoolOpt devCfg.lsp.enable;
+    formatter.enable = my.mkBoolOpt devCfg.formatter.enable;
+    linter.enable = my.mkBoolOpt devCfg.linter.enable;
   };
 
   config = mkIf cfg.enable {
@@ -22,9 +24,12 @@ in {
       bear
       gdb
       cmake
+      gnumake
       llvmPackages.libcxx
     ] ++ [
-      (mkIf cfg.lsp.enable clang-tools)
+      (mkIf
+        (cfg.lsp.enable || cfg.formatter.enable || cfg.linter.enable)
+        clang-tools)
     ];
   };
 }

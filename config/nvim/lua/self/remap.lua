@@ -3,10 +3,6 @@ vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, {
   desc = "[P]re[V]ious (Opens netrw)"
 })
 
-vim.keymap.set("n", "<C-s>", function()
-  vim.lsp.buf.format()
-  vim.cmd(":w")
-end, { desc = "Format & [S]ave" })
 vim.keymap.set("n", "<C-r>", ":so<CR>", { desc = "[R]eload Config File" })
 
 -- disable space, its our leader key
