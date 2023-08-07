@@ -1,7 +1,6 @@
 { config, lib, ... }:
 with lib;
-let 
-  cfg = config.modules.services.transmission;
+let cfg = config.modules.services.transmission;
 in {
   options.modules.services.transmission = {
     enable = mkEnableOption "Transmission";

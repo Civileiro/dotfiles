@@ -2,8 +2,9 @@
 
 { config, lib, pkgs, ... }:
 with lib;
-let devCfg = config.modules.dev;
-    cfg = devCfg.java;
+let
+  devCfg = config.modules.dev;
+  cfg = devCfg.java;
 in {
   options.modules.dev.java = {
     enable = mkEnableOption "Java";
@@ -20,8 +21,6 @@ in {
       enable = cfg.install;
       package = cfg.package;
     };
-    user.packages = with pkgs; [
-      (mkIf cfg.lsp.enable jdt-language-server)
-    ];
+    user.packages = with pkgs; [ (mkIf cfg.lsp.enable jdt-language-server) ];
   };
 }

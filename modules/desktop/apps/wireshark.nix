@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 with lib;
-let 
-  cfg = config.modules.desktop.apps.wireshark;
+let cfg = config.modules.desktop.apps.wireshark;
 in {
   options.modules.desktop.apps.wireshark = {
     enable = mkEnableOption "Wireshark";

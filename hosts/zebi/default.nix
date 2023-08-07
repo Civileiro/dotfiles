@@ -1,10 +1,7 @@
-{ ... }:
-{
-  imports = [
-    (import ./hardware-configuration.nix)
-  ];
+{ ... }: {
+  imports = [ (import ./hardware-configuration.nix) ];
 
-    # Configure console keymap
+  # Configure console keymap
   console.keyMap = "br-abnt2";
 
   modules = {
@@ -12,9 +9,7 @@
       nu.enable = true;
       git.enable = true;
       tmux.enable = true;
-      utils = {
-        btop.enable = true;
-      };
+      utils = { btop.enable = true; };
     };
     editors = {
       default = "nvim";
@@ -26,6 +21,7 @@
       python.enable = true;
       cc.enable = true;
       nix.enable = true;
+      haskell.enable = true;
     };
     services = {
       docker.enable = true;
@@ -34,19 +30,13 @@
     };
     desktop = {
       plasma.enable = true;
-      apps = {
-        discord.enable = true;
-      };
+      apps = { discord.enable = true; };
       browsers = {
         default = "firefox";
         firefox.enable = true;
       };
-      gaming = {
-        steam.enable = true;
-      };
-      vm = {
-        libvirt.enable = true;
-      };
+      gaming = { steam.enable = true; };
+      vm = { libvirt.enable = true; };
       media = {
         krita.enable = true;
         nomacs.enable = true;

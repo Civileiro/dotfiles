@@ -3,14 +3,14 @@ let
   base = "/etc/nixpkgs/channels";
   nixpkgsPath = "${base}/nixpkgs";
 in {
-  imports = 
-    [ inputs.home-manager.nixosModules.home-manager ]
-    # All my personal modules
-    ++ ( lib.my.mapModulesRec' import ./modules );
-
+  imports = [
+    inputs.home-manager.nixosModules.home-manager
+  ]
+  # All my personal modules
+    ++ (lib.my.mapModulesRec' import ./modules);
 
   environment = {
-    systemPackages = with pkgs; [ 
+    systemPackages = with pkgs; [
       neovim
       wget
       git
@@ -25,7 +25,6 @@ in {
     DOTFILES = config.dotfiles.dir;
     DOTFILES_BIN = config.dotfiles.binDir;
   };
-
 
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
@@ -65,7 +64,7 @@ in {
 
     registry.nixpkgs.flake = inputs.nixpkgs;
 
-    nixPath = [ 
+    nixPath = [
       "nixpkgs=${nixpkgsPath}"
       "/nix/var/nix/profiles/per-user/root/channels"
     ];
@@ -75,19 +74,19 @@ in {
     };
   };
 
-  systemd.tmpfiles.rules = [
-    "L+ ${nixpkgsPath}     - - - - ${inputs.nixpkgs}"
-  ];
+  systemd.tmpfiles.rules =
+    [ "L+ ${nixpkgsPath}     - - - - ${inputs.nixpkgs}" ];
 
   # make a file with the name of all installed packages
-  environment.etc."current-packages".text = 
-    with builtins; let
-      packages = config.environment.systemPackages ++ config.users.users.${config.user.name}.packages;
+  environment.etc."current-packages".text = with builtins;
+    let
+      packages = config.environment.systemPackages
+        ++ config.users.users.${config.user.name}.packages;
       packageNames = map (p: "${p.name}") packages;
       sortedUnique = sort lessThan (lib.unique packageNames);
       formatted = concatStringsSep "\n" sortedUnique;
     in formatted;
-  
+
   # Let 'nixos-version --json' know about the Git revision of this flake
   system.configurationRevision = lib.mkIf (self ? rev) self.rev;
 

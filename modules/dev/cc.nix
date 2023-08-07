@@ -6,8 +6,9 @@
 
 { config, lib, pkgs, ... }:
 with lib;
-let devCfg = config.modules.dev;
-    cfg = devCfg.cc;
+let
+  devCfg = config.modules.dev;
+  cfg = devCfg.cc;
 in {
   options.modules.dev.cc = {
     enable = mkEnableOption "C/C++";
@@ -18,18 +19,18 @@ in {
   };
 
   config = mkIf cfg.enable {
-    user.packages = with pkgs; builtins.map (mkIf cfg.install) [
-      clang
-      gcc
-      bear
-      gdb
-      cmake
-      gnumake
-      llvmPackages.libcxx
-    ] ++ [
-      (mkIf
-        (cfg.lsp.enable || cfg.formatter.enable || cfg.linter.enable)
-        clang-tools)
-    ];
+    user.packages = with pkgs;
+      builtins.map (mkIf cfg.install) [
+        clang
+        gcc
+        bear
+        gdb
+        cmake
+        gnumake
+        llvmPackages.libcxx
+      ] ++ [
+        (mkIf (cfg.lsp.enable || cfg.formatter.enable || cfg.linter.enable)
+          clang-tools)
+      ];
   };
 }

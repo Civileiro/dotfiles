@@ -2,12 +2,9 @@
 
 { config, lib, ... }:
 with lib;
-let 
-  cfg = config.modules.services.tpm;
+let cfg = config.modules.services.tpm;
 in {
-  options.modules.services.tpm = {
-    enable = mkEnableOption "TPM2";
-  };
+  options.modules.services.tpm = { enable = mkEnableOption "TPM2"; };
 
   config = mkIf cfg.enable {
     security.tpm2.enable = true;

@@ -2,8 +2,9 @@
 
 { config, lib, pkgs, ... }:
 with lib;
-let devCfg = config.modules.dev;
-    cfg = devCfg.haskell;
+let
+  devCfg = config.modules.dev;
+  cfg = devCfg.haskell;
 in {
   options.modules.dev.haskell = {
     enable = mkEnableOption "Haskell";

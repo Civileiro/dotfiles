@@ -2,8 +2,9 @@
 
 { config, lib, pkgs, ... }:
 with lib;
-let devCfg = config.modules.dev;
-    cfg = devCfg.python;
+let
+  devCfg = config.modules.dev;
+  cfg = devCfg.python;
 in {
   options.modules.dev.python = {
     enable = mkEnableOption "Python";
@@ -15,13 +16,15 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      (mkIf cfg.install (python3.withPackages (ps: with ps; flatten [
-        virtualenv
-        (optional cfg.linter.enable mypy)
-        (optional cfg.linter.enable ruff)
-        (optional cfg.formatter.enable black)
-        (optional cfg.lsp.enable ruff-lsp)
-      ])))
+      (mkIf cfg.install (python3.withPackages (ps:
+        with ps;
+        flatten [
+          virtualenv
+          (optional cfg.linter.enable mypy)
+          (optional cfg.linter.enable ruff)
+          (optional cfg.formatter.enable black)
+          (optional cfg.lsp.enable ruff-lsp)
+        ])))
       (mkIf cfg.lsp.enable nodePackages.pyright)
     ];
   };

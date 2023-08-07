@@ -7,7 +7,8 @@
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   boot = {
-    initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
+    initrd.availableKernelModules =
+      [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
     initrd.kernelModules = [ ];
     kernelModules = [ "kvm-amd" ];
     extraModulePackages = [ ];
@@ -19,12 +20,9 @@
       nvidia.enable = true;
       wacom.enable = true;
       fs.enable = true;
-      drivers = {
-        enable = true;
-      };
+      drivers = { enable = true; };
     };
   };
-
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/f87378a9-55e0-4005-a2c2-462aa48fcf09";
@@ -46,5 +44,6 @@
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp6s0.useDHCP = lib.mkDefault true;
 
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.amd.updateMicrocode =
+    lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

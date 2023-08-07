@@ -9,4 +9,3 @@ vim.keymap.set("n", "<Leader>fg", builtin.live_grep, {
 vim.keymap.set("n", "<Leader>gf", builtin.git_files, {
   desc = "With only [G]it files, [F]ind contents with grep",
 })
-

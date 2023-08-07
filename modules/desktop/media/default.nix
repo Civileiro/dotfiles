@@ -4,8 +4,7 @@
 
 { config, lib, pkgs, ... }:
 with lib;
-let
-  cfg = config.modules.desktop.media;
+let cfg = config.modules.desktop.media;
 in {
 
   options.modules.desktop.media = {

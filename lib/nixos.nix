@@ -1,5 +1,4 @@
-{ inputs, self, system, lib, pkgs, ... }:
-{
+{ inputs, self, system, lib, pkgs, ... }: {
   mkHost = hostPath:
     lib.nixosSystem {
       inherit system;
@@ -7,7 +6,8 @@
       modules = [
         {
           nixpkgs.pkgs = pkgs;
-          networking.hostName = lib.mkDefault (lib.removeSuffix ".nix" (builtins.baseNameOf hostPath));
+          networking.hostName = lib.mkDefault
+            (lib.removeSuffix ".nix" (builtins.baseNameOf hostPath));
         }
         hostPath
         self.root # can't directly access root ( ../. fails )

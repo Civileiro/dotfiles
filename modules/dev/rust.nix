@@ -2,14 +2,15 @@
 
 { config, lib, pkgs, ... }:
 with lib;
-let devCfg = config.modules.dev;
-    cfg = devCfg.rust;
+let
+  devCfg = config.modules.dev;
+  cfg = devCfg.rust;
 in {
   options.modules.dev.rust = {
     enable = mkEnableOption "Rust";
     components = mkOption {
       type = with types; listOf str;
-      default = [];
+      default = [ ];
       description = "Rust components to be installed";
     };
     lsp.enable = my.mkBoolOpt devCfg.lsp.enable;
@@ -22,12 +23,12 @@ in {
     {
       modules.dev.rust.components = let
         # Always install the Rust compiler, standard library and cargo
-        base = [ "rustc" "rust-src" "cargo" ]; 
-        lsp = if cfg.lsp.enable then [ "rust-analyzer" ] else [];
-        formatter = if cfg.formatter.enable then [ "rustfmt" ] else [];
-        linter = if cfg.linter.enable then [ "clippy" ] else [];
-        in unique (base ++ lsp ++ formatter ++ linter);
-      user.packages = [( pkgs.fenix.stable.withComponents cfg.components )];
+        base = [ "rustc" "rust-src" "cargo" ];
+        lsp = if cfg.lsp.enable then [ "rust-analyzer" ] else [ ];
+        formatter = if cfg.formatter.enable then [ "rustfmt" ] else [ ];
+        linter = if cfg.linter.enable then [ "clippy" ] else [ ];
+      in unique (base ++ lsp ++ formatter ++ linter);
+      user.packages = [ (pkgs.fenix.stable.withComponents cfg.components) ];
       # rust needs llvm
       modules.dev.cc = {
         enable = true;

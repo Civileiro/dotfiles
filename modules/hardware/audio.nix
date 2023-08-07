@@ -1,13 +1,9 @@
-
 { config, lib, ... }:
 with lib;
-let 
-  cfg = config.modules.hardware.audio;
+let cfg = config.modules.hardware.audio;
 in {
-  
-  options.modules.hardware.audio = {
-    enable = mkEnableOption "audio";
-  };
+
+  options.modules.hardware.audio = { enable = mkEnableOption "audio"; };
 
   config = mkIf cfg.enable {
     # Enable sound with pipewire.

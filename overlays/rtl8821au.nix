@@ -1,5 +1,4 @@
-self: super:
-{
+self: super: {
   linuxPackages_latest = super.linuxPackages_latest.extend (lpself: lpsuper: {
     rtl8821au = lpsuper.rtl8821au.overrideAttrs (old: {
       src = super.fetchFromGitHub {

@@ -1,12 +1,9 @@
 { config, lib, pkgs, ... }:
 with lib;
-let
-  cfg = config.modules.desktop.plasma;
+let cfg = config.modules.desktop.plasma;
 in {
 
-  options.modules.desktop.plasma = {
-    enable = mkEnableOption "KDE Plasma";
-  };
+  options.modules.desktop.plasma = { enable = mkEnableOption "KDE Plasma"; };
 
   config = mkIf cfg.enable {
     services.xserver = {
@@ -25,7 +22,11 @@ in {
         libsForQt5.filelight
         libsForQt5.ffmpegthumbs
         wineWowPackages.stable
-        (catppuccin-kde.override { flavour = ["frappe"]; accents = ["teal"]; winDecStyles = ["modern"]; })
+        (catppuccin-kde.override {
+          flavour = [ "frappe" ];
+          accents = [ "teal" ];
+          winDecStyles = [ "modern" ];
+        })
         catppuccin-gtk
       ];
       plasma5 = {

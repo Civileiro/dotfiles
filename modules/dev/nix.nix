@@ -2,8 +2,9 @@
 
 { config, lib, pkgs, ... }:
 with lib;
-let devCfg = config.modules.dev;
-    cfg = devCfg.nix;
+let
+  devCfg = config.modules.dev;
+  cfg = devCfg.nix;
 in {
   options.modules.dev.nix = {
     enable = mkEnableOption "Nix Dev";

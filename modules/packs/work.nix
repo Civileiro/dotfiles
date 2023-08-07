@@ -4,12 +4,9 @@
 
 { config, lib, pkgs, ... }:
 with lib;
-let 
-  cfg = config.modules.packs.work;
+let cfg = config.modules.packs.work;
 in {
-  options.modules.packs.work = {
-    enable = mkEnableOption "Boring";
-  };
+  options.modules.packs.work = { enable = mkEnableOption "Boring"; };
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
