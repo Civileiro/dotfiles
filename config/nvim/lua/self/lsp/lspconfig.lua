@@ -82,3 +82,27 @@ if has_rust then
     }
   })
 end
+
+-- HASKELL
+local has_haskell, ht = pcall(require, "haskell-tools")
+if has_haskell then
+  -- vim.api.nvim_create_autocmd("FileType", {
+  --   desc = "haskell-tools config",
+  --   group = vim.api.nvim_create_augroup("HaskellToolsConfig", {}),
+  --   pattern = { "haskell", "cabal", "cabal" },
+  --   callback = function(event)
+  --     local opts = { noremap = true, buffer = event.buf }
+  --     vim.keymap.set("n", "<Leader>cr", vim.lsp.codelens.run, opts)
+  --   end
+  -- })
+  -- Replace with the above when it gets updated
+  ht.setup({
+    hls = {
+      on_attach = function(_client, bufnr)
+        local opts = { buffer = bufnr }
+
+        vim.keymap.set("n", "<Leader>cr", vim.lsp.codelens.run, opts)
+      end
+    }
+  })
+end

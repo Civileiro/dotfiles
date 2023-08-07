@@ -47,6 +47,7 @@ in {
           nvim-scrollbar # fancy scrollbar
           nvim-lint # support non-lsp diagnostics
           formatter-nvim # integrate formatters
+          (optional devCfg.haskell.enable haskell-tools-nvim )
           (optional devCfg.rust.enable rust-tools-nvim)
           (optional shellCfg.tmux.enable vim-tmux-navigator) # tmux integration 
         ];
