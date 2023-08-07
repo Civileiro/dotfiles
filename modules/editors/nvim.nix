@@ -20,6 +20,7 @@ in {
           catppuccin-nvim # theme
           telescope-nvim # fuzzy finder
           nvim-treesitter.withAllGrammars # syntax tree builder & highlighter
+          playground # show syntax tree
           harpoon # quick select menu
           undotree # access nvim's undo tree
           vim-fugitive gitsigns-nvim # git integration
