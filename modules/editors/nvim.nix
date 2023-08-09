@@ -6,7 +6,16 @@ let
   shellCfg = config.modules.shell;
   configDir = config.dotfiles.configDir;
 in {
-  options.modules.editors.nvim = { enable = mkEnableOption "Neovim"; };
+  options.modules.editors.nvim = with types; {
+    enable = mkEnableOption "Neovim";
+    settings = mkOption {
+      type = attrsOf (nullOr (oneOf [ bool int float str ]));
+      default = { };
+      description = ''
+        Global variables to set for the Neovim config
+      '';
+    };
+  };
 
   config = mkIf cfg.enable {
     hmModules = [{
@@ -16,7 +25,6 @@ in {
         vimAlias = true;
         plugins = with pkgs.vimPlugins;
           flatten [
-            catppuccin-nvim # theme
             telescope-nvim # fuzzy finder
             nvim-treesitter.withAllGrammars # syntax tree builder & highlighter
             playground # show syntax tree
@@ -65,10 +73,16 @@ in {
       linter.enable = true;
     };
     home.config.file = {
-      "nvim" = {
-        source = "${configDir}/nvim";
+      "nvim/init.lua".source = "${configDir}/nvim/init.lua";
+      "nvim/lua/self" = {
+        source = "${configDir}/nvim/lua/self";
         recursive = true;
       };
+      "nvim/lua/settings.lua".text = concatStringsSep "\n" (mapAttrsToList (n: v:
+        let
+          type = builtins.typeOf v;
+          value = if type == "string" then ''"${v}"'' else builtins.toString v;
+        in ''vim.g["${n}"] = ${value}'') cfg.settings);
     };
   };
 }

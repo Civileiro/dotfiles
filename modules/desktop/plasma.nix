@@ -22,12 +22,6 @@ in {
         libsForQt5.filelight
         libsForQt5.ffmpegthumbs
         wineWowPackages.stable
-        (catppuccin-kde.override {
-          flavour = [ "frappe" ];
-          accents = [ "teal" ];
-          winDecStyles = [ "modern" ];
-        })
-        catppuccin-gtk
       ];
       plasma5 = {
         excludePackages = with pkgs.libsForQt5; [

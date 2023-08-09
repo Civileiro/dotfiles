@@ -1,7 +1,11 @@
 -- lualine.lua
-require("lualine").setup({
+local ll = require("lualine")
+-- default config
+local cfg = ll.get_config()
+
+ll.setup({
   options = {
-    theme = "catppuccin",
+    theme = vim.g.lualine_theme or cfg.options.theme,
     disabled_filetypes = { "neo-tree" },
     globalstatus = true,
   },

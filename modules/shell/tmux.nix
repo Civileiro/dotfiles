@@ -19,7 +19,6 @@ in {
             source ${config.xdg.configHome}/tmux/${file}
           '') configFiles;
           plugins = with pkgs.tmuxPlugins; [
-            catppuccin # theme
             vim-tmux-navigator # vim integration
             resurrect # save tmux session through restarts
             continuum # tmux always on and saving
