@@ -31,6 +31,14 @@ in {
           })
         ];
     })
+    (mkIf config.services.xserver.displayManager.sddm.enable {
+      services.xserver.displayManager.sddm.settings = {
+        General = { InputMethod = ""; };
+      };
+      services.xserver.displayManager.sddm.theme = "catppuccin-${cfg.flavour}";
+      environment.systemPackages = with pkgs;
+        [ (catppuccin-sddm.override { flavour = cfg.flavour; }) ];
+    })
     (mkIf config.modules.editors.nvim.enable {
       modules.editors.nvim.settings = {
         theme = "catppuccin";
