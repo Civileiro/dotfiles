@@ -35,9 +35,10 @@ vim.keymap.set("n", "<C-s>", function()
   end
   -- fallback to external formatter
   if not lsp_format then
-    vim.cmd("Format")
+    vim.cmd("FormatWrite")
+  else
+    vim.cmd.write()
   end
-  vim.cmd.write()
 end, {
   desc = "Format & [S]ave",
 })
