@@ -47,11 +47,12 @@ in {
       hmModules = [{
         programs.tmux = let tmuxppuccin = pkgs.tmuxPlugins.catppuccin;
         in {
-          extraConfig = ''
-            set -g @catppuccin_flavour "${cfg.flavour}"
-            run-shell ${tmuxppuccin}/share/tmux-plugins/catppuccin/catppuccin.tmux
-          '';
-          plugins = [ tmuxppuccin ];
+          plugins = [{
+            plugin = tmuxppuccin;
+            extraConfig = ''
+              set -g @catppuccin_flavour "${cfg.flavour}"
+            '';
+          }];
         };
       }];
     })

@@ -20,8 +20,19 @@ in {
           '') configFiles;
           plugins = with pkgs.tmuxPlugins; [
             vim-tmux-navigator # vim integration
-            resurrect # save tmux session through restarts
-            continuum # tmux always on and saving
+            { # save tmux session through restarts
+              plugin = resurrect;
+              extraConfig = ''
+                set -g @resurrect-dir "~/.local/share/tmux/resurrect"
+              '';
+            }
+            { # tmux always on and saving
+              plugin = continuum;
+              extraConfig = ''
+                set -g @continuum-boot "on"
+                set -g @continuum-restore "on"
+              '';
+            }
           ];
         };
       })
