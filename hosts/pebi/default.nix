@@ -38,6 +38,7 @@
         firefox.enable = true;
       };
       gaming = { steam.enable = true; };
+      vm = { libvirt.enable = true; };
       media = {
         nomacs.enable = true;
         vlc.enable = true;
