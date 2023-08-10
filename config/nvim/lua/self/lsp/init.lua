@@ -14,6 +14,8 @@ vim.diagnostic.config({
   },
 })
 
+vim.opt.completeopt = "menu,menuone,preview,noselect"
+
 require("self.lsp.autocmd")
 require("self.lsp.cmp")
 require("self.lsp.lspconfig")
