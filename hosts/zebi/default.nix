@@ -5,6 +5,10 @@
   console.keyMap = "br-abnt2";
 
   modules = {
+    theme = {
+      active = "catppuccin";
+      catppuccin.flavour = "mocha";
+    };
     shell = {
       nu.enable = true;
       git.enable = true;
