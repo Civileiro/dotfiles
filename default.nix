@@ -5,6 +5,7 @@ let
 in {
   imports = [
     inputs.home-manager.nixosModules.home-manager
+    inputs.blocklist.nixosModule
   ]
   # All my personal modules
     ++ (lib.my.mapModulesRec' import ./modules);

@@ -12,6 +12,11 @@
       url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    blocklist = {
+      # network blocklist
+      url = "github:StevenBlack/hosts";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, fenix, ... }:
