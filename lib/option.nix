@@ -1,6 +1,6 @@
 { lib, ... }:
 let inherit (lib) mkOption types const;
-in {
+in rec {
   mkOpt = type: default: mkOption { inherit type default; };
 
   mkOpt' = type: default: description:
@@ -19,4 +19,6 @@ in {
       type = types.bool;
       example = true;
     };
+
+  mkListOf = type: mkOpt (types.listOf type) [ ];
 }
