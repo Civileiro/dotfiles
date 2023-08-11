@@ -6,7 +6,11 @@ let
   configDir = config.dotfiles.configDir;
   configFiles = my.readDirNames "${configDir}/tmux";
 in {
-  options.modules.shell.tmux = { enable = mkEnableOption "tmux"; };
+  options.modules.shell.tmux = with types; {
+    enable = mkEnableOption "tmux";
+    extraPlugins = my.mkListOf anything;
+    extraPluginsAfter = my.mkListOf anything;
+  };
 
   config = mkIf cfg.enable {
     hmModules = [
@@ -18,22 +22,24 @@ in {
           extraConfig = concatMapStrings (file: ''
             source ${config.xdg.configHome}/tmux/${file}
           '') configFiles;
-          plugins = with pkgs.tmuxPlugins; [
-            vim-tmux-navigator # vim integration
-            { # save tmux session through restarts
-              plugin = resurrect;
-              extraConfig = ''
-                set -g @resurrect-dir "~/.local/share/tmux/resurrect"
-              '';
-            }
-            { # tmux always on and saving
-              plugin = continuum;
-              extraConfig = ''
-                set -g @continuum-boot "on"
-                set -g @continuum-restore "on"
-              '';
-            }
-          ];
+          plugins = let
+            basePlugins = with pkgs.tmuxPlugins; [
+              vim-tmux-navigator # vim integration
+              { # save tmux session through restarts
+                plugin = resurrect;
+                extraConfig = ''
+                  set -g @resurrect-dir "~/.local/share/tmux/resurrect"
+                '';
+              }
+              { # tmux always on and saving
+                plugin = continuum;
+                extraConfig = ''
+                  set -g @continuum-boot "on"
+                  set -g @continuum-restore "on"
+                '';
+              }
+            ];
+          in cfg.extraPlugins ++ basePlugins ++ cfg.extraPluginsAfter;
         };
       })
     ];

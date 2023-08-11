@@ -52,16 +52,11 @@ in {
       }];
     })
     (mkIf config.modules.shell.tmux.enable {
-      hmModules = [{
-        programs.tmux = let tmuxppuccin = pkgs.tmuxPlugins.catppuccin;
-        in {
-          plugins = [{
-            plugin = tmuxppuccin;
-            extraConfig = ''
-              set -g @catppuccin_flavour "${cfg.flavour}"
-            '';
-          }];
-        };
+      modules.shell.tmux.extraPlugins = [{
+        plugin = pkgs.tmuxPlugins.catppuccin;
+        extraConfig = ''
+          set -g @catppuccin_flavour "${cfg.flavour}"
+        '';
       }];
     })
   ]);
