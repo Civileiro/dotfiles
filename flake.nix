@@ -22,28 +22,27 @@
   outputs = inputs@{ self, nixpkgs, fenix, ... }:
     let
       system = "x86_64-linux";
+      additionalSelf = {
+        user = "civi";
+        root = ./.;
+      };
 
-      makePkgs = pkgs: overlays:
-        import pkgs {
-          inherit system overlays;
-          config.allowUnfree = true; # sorry Stallman
-        };
-      pkgs = makePkgs nixpkgs self.overlays;
+      overlays = lib.attrValues (lib.my.mapModules import ./overlays)
+        ++ [ fenix.overlays.default ];
+      pkgs = import nixpkgs {
+        inherit system overlays;
+        config.allowUnfree = true; # sorry Stallman
+      };
 
       # extend lib with out own libraries in lib.my
       lib = nixpkgs.lib.extend (final: prev: {
         my = import ./lib {
-          inherit inputs self system pkgs;
+          inherit inputs system pkgs;
+          self = self // additionalSelf;
           lib = final;
         };
       });
     in {
-      user = "civi";
-      root = ./.;
-
-      overlays = lib.attrValues (lib.my.mapModules import ./overlays)
-        ++ [ fenix.overlays.default ];
-
       nixosModules = lib.my.mapModulesRec import ./modules;
 
       nixosConfigurations = lib.my.mapModules lib.my.mkHost ./hosts;
