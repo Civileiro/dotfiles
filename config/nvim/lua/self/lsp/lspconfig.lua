@@ -18,6 +18,13 @@ lspconfig["lua_ls"].setup({
 -- PYTHON
 lspconfig["pyright"].setup({
   capabilities = capabilities,
+  settings = {
+    python = {
+      analysis = {
+        typeCheckingMode = "off",
+      }
+    }
+  },
 })
 lspconfig["ruff_lsp"].setup({
   on_attach = function(client)
