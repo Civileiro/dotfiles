@@ -31,13 +31,6 @@ in {
                   set -g @resurrect-dir "~/.local/share/tmux/resurrect"
                 '';
               }
-              { # tmux always on and saving
-                plugin = continuum;
-                extraConfig = ''
-                  set -g @continuum-boot "on"
-                  set -g @continuum-restore "on"
-                '';
-              }
             ];
           in cfg.extraPlugins ++ basePlugins ++ cfg.extraPluginsAfter;
         };
