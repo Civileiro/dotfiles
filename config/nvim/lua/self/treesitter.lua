@@ -7,4 +7,7 @@ require("nvim-treesitter.configs").setup({
       node_decremental = "<C-Down>",
     },
   },
+  highlight = {
+    enable = true,
+  },
 })
