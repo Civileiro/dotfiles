@@ -10,7 +10,7 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      awscli
+      awscli2
       kubectl
       dbeaver
       google-chrome
@@ -18,6 +18,7 @@ in {
       insomnia
       redis
       vscode
+      lens
     ];
   };
 }
