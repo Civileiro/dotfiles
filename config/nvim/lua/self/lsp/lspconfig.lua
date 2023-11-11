@@ -72,6 +72,21 @@ lspconfig["nil_ls"].setup({
 -- RUST
 local has_rust, rt = pcall(require, "rust-tools")
 if has_rust then
+  local function get_project_rustanalyzer_settings()
+    local handle = io.open(vim.fn.resolve(vim.fn.getcwd() .. '/./.rust-analyzer.json'))
+    if not handle then
+      return {}
+    end
+    local out = handle:read("*a")
+    handle:close()
+    local config = vim.json.decode(out)
+    if type(config) == "table" then
+      return config
+    end
+    return {}
+  end
+
+
   local check_cmd
   if vim.fn.executable("clippy-driver") then
     check_cmd = "clippy"
@@ -82,9 +97,17 @@ if has_rust then
     server = {
       capabilities = capabilities,
       settings = {
-        ["rust-analyzer"] = {
+        ["rust-analyzer"] = vim.tbl_deep_extend(
+        "force",
+        {
+          -- Defaults
           check = { command = check_cmd, },
         },
+          -- Project config
+        get_project_rustanalyzer_settings(),
+        {
+          -- Overrides
+        }),
       },
     }
   })
