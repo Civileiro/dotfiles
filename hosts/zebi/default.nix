@@ -39,7 +39,10 @@
         default = "firefox";
         firefox.enable = true;
       };
-      gaming = { steam.enable = true; };
+      gaming = {
+        steam.enable = true;
+        emulators = { gba.enable = true; };
+      };
       vm = { libvirt.enable = true; };
       media = {
         krita.enable = true;
