@@ -59,8 +59,6 @@
         };
       };
     };
-
-    packs.work.enable = true;
   };
 
 }
