@@ -19,6 +19,7 @@
       audio.enable = true;
       nvidia.enable = true;
       wacom.enable = true;
+      tablet.enable = true;
       fs.enable = true;
       drivers = { enable = true; };
     };
