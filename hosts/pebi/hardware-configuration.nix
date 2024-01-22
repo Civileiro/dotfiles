@@ -21,6 +21,7 @@
       };
       audio.enable = true;
       fs.enable = true;
+      bluetooth.enable = true;
     };
   };
 
