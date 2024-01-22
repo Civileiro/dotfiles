@@ -59,5 +59,15 @@ in {
         '';
       }];
     })
+    (mkIf config.modules.desktop.terminal.alacritty.enable {
+      modules.desktop.terminal.alacritty.configImports = let
+        catppuccin-alacritty = pkgs.fetchFromGitHub {
+          owner = "catppuccin";
+          repo = "alacritty";
+          rev = "f2da554ee63690712274971dd9ce0217895f5ee0";
+          hash = "sha256-ypYaxlsDjI++6YNcE+TxBSnlUXKKuAMmLQ4H74T/eLw=";
+        };
+      in [ (catppuccin-alacritty + "/catppuccin-${cfg.flavour}.toml") ];
+    })
   ]);
 }
