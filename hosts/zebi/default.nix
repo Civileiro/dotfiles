@@ -47,7 +47,7 @@
       media = {
         krita.enable = true;
         nomacs.enable = true;
-        vlc.enable = true;
+        mpv.enable = true;
         libreoffice.enable = true;
         kate.enable = true;
       };

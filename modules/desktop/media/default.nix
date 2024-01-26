@@ -11,6 +11,7 @@ in {
     krita.enable = mkEnableOption "Krita";
     nomacs.enable = mkEnableOption "Nomacs";
     vlc.enable = mkEnableOption "VLC";
+    mpv.enable = mkEnableOption "MPV";
     kate.enable = mkEnableOption "Kate";
   };
 
@@ -19,6 +20,7 @@ in {
       (mkIf cfg.krita.enable krita)
       (mkIf cfg.nomacs.enable nomacs)
       (mkIf cfg.vlc.enable vlc)
+      (mkIf cfg.mpv.enable mpv)
       (mkIf cfg.kate.enable kate)
     ];
   };
