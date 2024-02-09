@@ -35,6 +35,11 @@
     fsType = "vfat";
   };
 
+  fileSystems."${config.user.home}/mass" = {
+    device = "/dev/disk/by-uuid/5ee1905a-132f-4d24-8eaf-db05f84c71ae";
+    fsType = "ext4";
+  };
+
   swapDevices =
     [{ device = "/dev/disk/by-uuid/af3b853b-af29-42ff-bd8c-89c93e96d399"; }];
 
