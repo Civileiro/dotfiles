@@ -29,13 +29,7 @@ with lib; {
       };
     };
 
-    env = mkOption {
-      type = attrsOf (oneOf [ str path (listOf (either str path)) ]);
-      apply = mapAttrs (n: v:
-        if isList v then concatMapStringsSep ":" toString v else (toString v));
-      default = { };
-      description = "System environment variables";
-    };
+    env = my.mkOpt' attrs { } "System environment variables";
 
     # Modules to be imported by home-manager
     hmModules = my.mkOpt (listOf anything) [ ];
@@ -91,7 +85,6 @@ with lib; {
     # because it contains a nix store path.
     env.PATH = [ "$DOTFILES_BIN" "$XDG_BIN_HOME" "$PATH" ];
 
-    environment.extraInit = concatStringsSep "\n"
-      (mapAttrsToList (n: v: ''export ${n}="${v}"'') config.env);
+    environment.sessionVariables = mkAliasDefinitions options.env;
   };
 }
