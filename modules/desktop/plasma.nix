@@ -3,14 +3,28 @@ with lib;
 let cfg = config.modules.desktop.plasma;
 in {
 
-  options.modules.desktop.plasma = { enable = mkEnableOption "KDE Plasma"; };
+  options.modules.desktop.plasma = {
+    enable = mkEnableOption "KDE Plasma";
+    wayland.enable = mkEnableOption "KWayland";
+  };
 
   config = mkIf cfg.enable {
+
+    modules.desktop = {
+      x.enable = true;
+      wayland.enable = cfg.wayland.enable;
+      de = [ "plasma" ];
+    };
+
     services.xserver = {
       enable = true;
-      displayManager.sddm = {
-        enable = true;
-        autoNumlock = true;
+      displayManager = {
+        defaultSession =
+          if cfg.wayland.enable then "plasmawayland" else "plasma";
+        sddm = {
+          enable = true;
+          autoNumlock = true;
+        };
       };
       desktopManager.plasma5.enable = true;
 
@@ -22,6 +36,7 @@ in {
         libsForQt5.filelight
         libsForQt5.ffmpegthumbs
         wineWowPackages.stable
+        (if cfg.wayland.enable then wl-clipboard else xclip)
       ];
       plasma5 = {
         excludePackages = with pkgs.libsForQt5; [

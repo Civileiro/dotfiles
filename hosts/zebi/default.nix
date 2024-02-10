@@ -33,7 +33,10 @@
       networkmanager.enable = true;
     };
     desktop = {
-      plasma.enable = true;
+      plasma = {
+        enable = true;
+        wayland.enable = true;
+      };
       apps = { discord.enable = true; };
       browsers = {
         default = "firefox";
