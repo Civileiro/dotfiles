@@ -37,7 +37,11 @@
         enable = true;
         wayland.enable = true;
       };
-      apps = { discord.enable = true; };
+      apps = {
+        discord.enable = true;
+        piper.enable = true;
+        obs.enable = true;
+      };
       browsers = {
         default = "firefox";
         firefox.enable = true;
