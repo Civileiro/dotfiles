@@ -10,6 +10,7 @@ in {
     vscode.enable = mkEnableOption "VSCode";
     discord.enable = mkEnableOption "Discord";
     obs.enable = mkEnableOption "OBS Studio";
+    mangohud.enable = mkEnableOption "MangoHUD";
   };
 
   config = {
@@ -17,6 +18,7 @@ in {
       (mkIf cfg.vscode.enable vscode)
       (mkIf cfg.discord.enable discord)
       (mkIf cfg.obs.enable obs-studio)
+      (mkIf cfg.mangohud.enable mangohud)
     ];
   };
 }

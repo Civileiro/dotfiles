@@ -41,6 +41,7 @@
         discord.enable = true;
         piper.enable = true;
         obs.enable = true;
+        mangohud.enable = true;
       };
       browsers = {
         default = "firefox";
