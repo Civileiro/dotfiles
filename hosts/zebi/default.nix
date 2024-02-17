@@ -1,4 +1,4 @@
-{ ... }: {
+{ config, ... }: {
   imports = [ (import ./hardware-configuration.nix) ];
 
   # Configure console keymap
@@ -29,7 +29,10 @@
     };
     services = {
       docker.enable = true;
-      transmission.enable = true;
+      transmission = {
+        enable = true;
+        folder = "${config.user.home}/mass/torrents";
+      };
       networkmanager.enable = true;
     };
     desktop = {
