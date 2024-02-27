@@ -7,7 +7,9 @@ in {
     enable = mkEnableOption "Nvidia drivers";
     prime = {
       enable = mkEnableOption "Nvidia Prime";
+      # Bus ID of the NVIDIA GPU. You can find it using lspci, either under 3D or VGA 
       nvidiaBusId = my.mkOpt types.str "";
+      # Bus ID of the Intel GPU. You can find it using lspci, either under 3D or VGA 
       intelBusId = my.mkOpt types.str "";
     };
   };
@@ -16,6 +18,7 @@ in {
     {
       hardware = {
         nvidia = {
+          package = config.boot.kernelPackages.nvidiaPackages.production;
           modesetting.enable = true;
           forceFullCompositionPipeline = true;
         };
