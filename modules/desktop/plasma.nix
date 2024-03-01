@@ -12,21 +12,21 @@ in {
 
     modules.desktop = {
       x.enable = true;
-      wayland.enable = cfg.wayland.enable;
+      wayland.enable = true;
       de = [ "plasma" ];
     };
 
     services.xserver = {
       enable = true;
       displayManager = {
-        defaultSession =
-          if cfg.wayland.enable then "plasmawayland" else "plasma";
+        # wayland default
+        defaultSession = "plasma";
         sddm = {
           enable = true;
           autoNumlock = true;
         };
       };
-      desktopManager.plasma5.enable = true;
+      desktopManager.plasma6.enable = true;
 
     };
 
@@ -36,9 +36,9 @@ in {
         libsForQt5.filelight
         libsForQt5.ffmpegthumbs
         wineWowPackages.stable
-        (if cfg.wayland.enable then wl-clipboard else xclip)
+        wl-clipboard
       ];
-      plasma5 = {
+      plasma6 = {
         excludePackages = with pkgs.libsForQt5; [
           elisa
           gwenview
