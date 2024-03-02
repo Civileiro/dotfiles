@@ -1,6 +1,6 @@
 self: super: {
-  catppuccin-sddm = super.callPackage
-    ({ stdenvNoCC, lib, fetchFromGitHub, flavour ? "mocha" }:
+  catppuccin-sddm = super.libsForQt5.callPackage
+    ({ stdenvNoCC, lib, fetchFromGitHub, qtgraphicaleffects, flavour ? "mocha" }:
 
       let
         pname = "catppuccin-sddm";
@@ -17,6 +17,8 @@ self: super: {
           rev = "7fc67d1027cdb7f4d833c5d23a8c34a0029b0661";
           hash = "sha256-SjYwyUvvx/ageqVH5MmYmHNRKNvvnF3DYMJ/f2/L+Go=";
         };
+
+        propagatedUserEnvPkgs = [ qtgraphicaleffects ];
 
         installPhase = ''
           runHook preInstall

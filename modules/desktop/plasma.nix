@@ -32,6 +32,7 @@ in {
 
     environment = {
       systemPackages = with pkgs; [
+        sddm
         libsForQt5.ark
         libsForQt5.filelight
         libsForQt5.ffmpegthumbs
