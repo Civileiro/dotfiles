@@ -13,6 +13,7 @@ in {
     vlc.enable = mkEnableOption "VLC";
     mpv.enable = mkEnableOption "MPV";
     kate.enable = mkEnableOption "Kate";
+    kdenlive.enable = mkEnableOption "Kdenlive";
   };
 
   config = {
@@ -22,6 +23,7 @@ in {
       (mkIf cfg.vlc.enable vlc)
       (mkIf cfg.mpv.enable mpv)
       (mkIf cfg.kate.enable kate)
+      (mkIf cfg.kdenlive.enable kdenlive)
     ];
   };
 

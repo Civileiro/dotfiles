@@ -61,6 +61,7 @@
         mpv.enable = true;
         libreoffice.enable = true;
         kate.enable = true;
+        kdenlive.enable = true;
       };
       terminal = {
         default = "alacritty";
