@@ -21,7 +21,7 @@
       wacom.enable = true;
       tablet.enable = true;
       fs.enable = true;
-      drivers = { enable = true; };
+      zenpower.enable = true;
     };
   };
 
