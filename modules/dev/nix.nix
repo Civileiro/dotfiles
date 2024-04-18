@@ -14,6 +14,8 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
+      nix-output-monitor
+      nvd
       (mkIf cfg.formatter.enable nixfmt)
       (mkIf cfg.lsp.enable nil)
     ];
