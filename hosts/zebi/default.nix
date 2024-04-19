@@ -36,10 +36,7 @@
       networkmanager.enable = true;
     };
     desktop = {
-      plasma = {
-        enable = true;
-        wayland.enable = true;
-      };
+      plasma.enable = true;
       apps = {
         discord.enable = true;
         piper.enable = true;
