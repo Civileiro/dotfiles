@@ -31,11 +31,11 @@ in {
           })
         ];
     })
-    (mkIf config.services.xserver.displayManager.sddm.enable {
-      services.xserver.displayManager.sddm.settings = {
+    (mkIf config.services.displayManager.sddm.enable {
+      services.displayManager.sddm.settings = {
         General = { InputMethod = ""; };
       };
-      services.xserver.displayManager.sddm.theme = "catppuccin-${cfg.flavour}";
+      services.displayManager.sddm.theme = "catppuccin-${cfg.flavour}";
       environment.systemPackages = with pkgs;
         [ (catppuccin-sddm.override { flavour = cfg.flavour; }) ];
     })

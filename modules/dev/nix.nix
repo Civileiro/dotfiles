@@ -16,7 +16,7 @@ in {
     user.packages = with pkgs; [
       nix-output-monitor
       nvd
-      (mkIf cfg.formatter.enable nixfmt)
+      (mkIf cfg.formatter.enable nixfmt-classic)
       (mkIf cfg.lsp.enable nil)
     ];
   };

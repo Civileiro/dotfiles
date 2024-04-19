@@ -3,25 +3,21 @@ with lib;
 let cfg = config.modules.desktop.plasma;
 in {
 
-  options.modules.desktop.plasma = {
-    enable = mkEnableOption "KDE Plasma";
-    wayland.enable = mkEnableOption "KWayland";
-  };
+  options.modules.desktop.plasma = { enable = mkEnableOption "KDE Plasma"; };
 
   config = mkIf cfg.enable {
 
     modules.desktop = {
-      x.enable = true;
       wayland.enable = true;
       de = [ "plasma" ];
     };
 
-    services.xserver = {
-      enable = true;
+    services = {
       displayManager = {
         # wayland default
         defaultSession = "plasma";
         sddm = {
+          wayland.enable = true;
           enable = true;
           autoNumlock = true;
         };
