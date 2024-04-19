@@ -41,7 +41,7 @@
       vm = { libvirt.enable = true; };
       media = {
         nomacs.enable = true;
-        vlc.enable = true;
+        mpv.enable = true;
         libreoffice.enable = true;
         kate.enable = true;
       };
