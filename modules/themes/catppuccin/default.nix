@@ -12,7 +12,7 @@ in {
   };
 
   config = mkIf (tCfg.active == "catppuccin") (mkMerge [
-    (mkIf config.services.xserver.enable {
+    (mkIf config.modules.desktop.enable {
       environment.systemPackages = with pkgs;
         [
           (catppuccin-gtk.override {

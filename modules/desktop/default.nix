@@ -1,11 +1,10 @@
 { config, lib, pkgs, ... }:
 
 with lib;
-let
-  cfg = config.modules.desktop;
-  x = config.services.xserver.enable;
+let cfg = config.modules.desktop;
 in {
   options.modules.desktop = with types; {
+    enable = mkEnableOption "Desktop Environment";
     x.enable = mkEnableOption "X";
     wayland.enable = mkEnableOption "Wayland";
     de = my.mkOpt (listOf str) [ ];
@@ -24,6 +23,8 @@ in {
           message = "Can't enable a desktop app without a desktop environment";
         }
       ];
+
+      modules.desktop.enable = mkDefault (cfg.x.enable || cfg.wayland.enable);
 
       fonts = {
         fontDir.enable = true;
