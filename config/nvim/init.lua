@@ -1,3 +1,6 @@
+-- enable faster experimental loader
+vim.loader.enable()
+
 -- optimize `runtimepath` when running from Nix
 for _, dir in ipairs(vim.opt.runtimepath:get()) do
   if vim.endswith(dir, "vim-pack-dir") then
