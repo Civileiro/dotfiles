@@ -11,8 +11,8 @@ in {
     ++ (lib.my.mapModulesRec' import ./modules);
 
   environment = {
-    systemPackages = with pkgs; [
-      neovim
+    systemPackages = with pkgs; lib.flatten [
+      (lib.optional (!config.modules.editors.nvim.enable) neovim)
       wget
       git
       neofetch # this is 100% always necessary trust me
