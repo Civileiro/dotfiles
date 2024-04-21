@@ -18,15 +18,10 @@ in {
       default = [ ];
       description = "Extra plugins to add to neovim";
     };
-    package = mkOption {
-      type = package;
-      default = pkgs.neovim-unwrapped;
-      description = "Package to use for the neovim binary";
-    };
     finalPackage = mkOption {
       type = package;
       readOnly = true;
-      description = Doc "Resulting customized neovim package";
+      description = "Resulting customized neovim package";
     };
   };
 
@@ -70,28 +65,92 @@ in {
         (optional devCfg.rust.enable rust-tools-nvim)
         (optional shellCfg.tmux.enable vim-tmux-navigator) # tmux integration
       ];
+
+    # extend plugin list with dependencies
+    allPlugins = let
+      pluginWithDeps = plugin:
+        [ plugin ]
+        ++ builtins.concatMap pluginWithDeps plugin.dependencies or [ ];
+    in lib.unique (builtins.concatMap pluginWithDeps plugins);
+
+    # remove help tags
+    allPluginsNoCollisions = lib.forEach allPlugins (plugin:
+      plugin.overrideAttrs (prev: {
+        nativeBuildInputs =
+          lib.remove pkgs.vimUtils.vimGenDocHook prev.nativeBuildInputs or [ ];
+        configurePhase = concatStringsSep "\n" (builtins.filter (s: s != ":") [
+          prev.configurePhase or ":"
+          "rm -f doc/tags"
+        ]);
+      }));
+
+    # Merge all plugins to one pack
+    mergedPlugins = pkgs.vimUtils.toVimPlugin (pkgs.buildEnv {
+      name = "plugin-pack";
+      paths = allPluginsNoCollisions;
+      pathsToLink = [
+        # :h rtp
+        "/autoload"
+        "/colors"
+        "/compiler"
+        "/doc"
+        "/ftplugin"
+        "/indent"
+        "/keymap"
+        "/lang"
+        "/lua"
+        "/pack"
+        "/parser"
+        "/plugin"
+        "/queries"
+        "/rplugin"
+        "/spell"
+        "/syntax"
+        "/tutor"
+        "/after"
+        # ftdetect
+        "/ftdetect"
+        # plenary.nvim
+        "/data"
+        # telescope-fzf-native-nvim
+        "/build"
+      ];
+      # Activate vimGenDocHook manually
+      postBuild = ''
+        find $out -type d -empty -delete
+        runHook preFixup
+      '';
+    });
+
+    # neovim wrapper config
     neovimConfig = pkgs.neovimUtils.makeNeovimConfig {
-      inherit plugins;
+      plugins = [ mergedPlugins ];
       viAlias = true;
       vimAlias = true;
       # don't need these
       withPython3 = false;
       withRuby = false;
       withNodeJs = false;
-    };
-    myNeovim = pkgs.wrapNeovimUnstable cfg.package (neovimConfig // {
       # make nvim read from ~/.config/nvim
       wrapRc = false;
-    });
+    };
+
+    # final neovim derivation
+    myNeovim = pkgs.wrapNeovimUnstable pkgs.neovim-unwrapped neovimConfig;
+
   in mkIf cfg.enable {
+
     modules.editors.nvim.finalPackage = myNeovim;
+
     user.packages = with pkgs; [ cfg.finalPackage lua-language-server ];
+
     # Turn on all our dev tools
     modules.dev = {
       lsp.enable = true;
       formatter.enable = true;
       linter.enable = true;
     };
+    # put configuration files in .config/nvim
     home.config.file = {
       "nvim/init.lua".source = "${configDir}/nvim/init.lua";
       "nvim/lua/self" = {
