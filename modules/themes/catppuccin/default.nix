@@ -40,16 +40,14 @@ in {
         [ (catppuccin-sddm.override { flavour = cfg.flavour; }) ];
     })
     (mkIf config.modules.editors.nvim.enable {
-      modules.editors.nvim.settings = {
-        theme = "catppuccin";
-        catppuccin_flavour = cfg.flavour;
-        lualine_theme = "catppuccin";
-      };
-      hmModules = [{
-        programs.neovim = {
-          plugins = with pkgs.vimPlugins; [ catppuccin-nvim ];
+      modules.editors.nvim = {
+        extraPlugins = [ pkgs.vimPlugins.catppuccin-nvim ];
+        settings = {
+          theme = "catppuccin";
+          catppuccin_flavour = cfg.flavour;
+          lualine_theme = "catppuccin";
         };
-      }];
+      };
     })
     (mkIf config.modules.shell.tmux.enable {
       modules.shell.tmux.extraPlugins = [{
