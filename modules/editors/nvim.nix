@@ -74,7 +74,7 @@ in {
     in lib.unique (builtins.concatMap pluginWithDeps plugins);
 
     # remove help tags
-    allPluginsNoCollisions = lib.forEach allPlugins (plugin:
+    removeTags = map (plugin:
       plugin.overrideAttrs (prev: {
         nativeBuildInputs =
           lib.remove pkgs.vimUtils.vimGenDocHook prev.nativeBuildInputs or [ ];
@@ -87,7 +87,7 @@ in {
     # Merge all plugins to one pack
     mergedPlugins = pkgs.vimUtils.toVimPlugin (pkgs.buildEnv {
       name = "plugin-pack";
-      paths = allPluginsNoCollisions;
+      paths = removeTags allPlugins;
       pathsToLink = [
         # :h rtp
         "/autoload"
