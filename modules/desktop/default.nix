@@ -18,8 +18,7 @@ in {
             "Can't have more than one desktop environment enabled at a time";
         }
         {
-          assertion = (length cfg.de == 1) || !(anyAttrs
-            (n: v: isAttrs v && anyAttrs (n: v: isAttrs v && v.enable)) cfg);
+          assertion = !(length cfg.de == 0 && my.anySubmoduleEnabled cfg);
           message = "Can't enable a desktop app without a desktop environment";
         }
       ];

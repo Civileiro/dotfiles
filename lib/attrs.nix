@@ -1,10 +1,16 @@
 { lib, ... }:
-with builtins;
-with lib; rec {
-  # attrsToList :: attrs -> [{name value}]
-  attrsToList = attrs:
-    mapAttrsToList (name: value: { inherit name value; }) attrs;
+let
+  inherit (builtins) any isAttrs;
+  inherit (lib) mapAttrsToList count id;
+in rec {
 
-  countAttrs = pred: attrs:
-    count (attr: pred attr.name attr.value) (attrsToList attrs);
+  countAttrs = pred: attrs: count id (mapAttrsToList pred attrs);
+
+  anyAttrs = pred: attrs: any id (mapAttrsToList pred attrs);
+
+  mapAttrsToListRec = pred: attrs:
+    (mapAttrsToList (n: v: if isAttrs v then anyAttrsRec pred v else pred n v)
+      attrs);
+
+  anyAttrsRec = pred: attrs: any id (mapAttrsToListRec pred attrs);
 }
