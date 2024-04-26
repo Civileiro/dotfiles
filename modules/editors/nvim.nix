@@ -165,5 +165,10 @@ in {
               if type == "string" then ''"${v}"'' else builtins.toString v;
           in ''vim.g["${n}"] = ${value}'') cfg.settings);
     };
+
+    system.userActivationScripts.cleanupNvimCache = ''
+      rm -rf ${config.home.cache.path}/nvim/luac
+    '';
+
   };
 }

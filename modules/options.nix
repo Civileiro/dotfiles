@@ -27,6 +27,10 @@ with lib; {
         path = my.mkConst str
           config.home-manager.users.${config.user.name}.xdg.dataHome;
       };
+      cache = {
+        path = my.mkConst str
+          config.home-manager.users.${config.user.name}.xdg.cacheHome;
+      };
     };
 
     env = my.mkOpt' attrs { } "System environment variables";
