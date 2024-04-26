@@ -4,7 +4,6 @@ let
   cfg = config.modules.editors.nvim;
   devCfg = config.modules.dev;
   shellCfg = config.modules.shell;
-  configDir = config.dotfiles.configDir;
 in {
   options.modules.editors.nvim = with types; {
     enable = mkEnableOption "Neovim";
@@ -152,9 +151,8 @@ in {
     };
     # put configuration files in .config/nvim
     home.config.file = {
-      "nvim/init.lua".source = "${configDir}/nvim/init.lua";
-      "nvim/lua/self" = {
-        source = "${configDir}/nvim/lua/self";
+      "nvim" = {
+        source = "${config.dotfiles.configDir}/nvim";
         recursive = true;
       };
       "nvim/lua/settings.lua".text = concatStringsSep "\n" (mapAttrsToList
