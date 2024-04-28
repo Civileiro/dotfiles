@@ -2,8 +2,6 @@
 
 vim.g.mapleader = " "
 
-vim.opt.shell = "nu"
-
 vim.opt.number = true
 vim.opt.relativenumber = true
 
