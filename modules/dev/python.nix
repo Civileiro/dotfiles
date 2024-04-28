@@ -21,10 +21,10 @@ in {
         flatten [
           virtualenv
           (optional cfg.linter.enable mypy)
-          (optional cfg.linter.enable ruff)
           (optional cfg.formatter.enable black)
           (optional cfg.lsp.enable ruff-lsp)
         ])))
+      (mkIf cfg.linter.enable ruff)
       (mkIf cfg.lsp.enable nodePackages.pyright)
     ];
   };
