@@ -10,7 +10,7 @@
       catppuccin.flavour = "latte";
     };
     shell = {
-      nu.enable = true;
+      zsh.enable = true;
       git.enable = true;
       tmux.enable = true;
       utils = { btop.enable = true; };
