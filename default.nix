@@ -15,7 +15,7 @@ in {
       (lib.optional (!config.modules.editors.nvim.enable) neovim)
       wget
       git
-      neofetch # this is 100% always necessary trust me
+      hyfetch # this is 100% always necessary trust me
       unzip
       ripgrep
       file
