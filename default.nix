@@ -11,15 +11,14 @@ in {
     ++ (lib.my.mapModulesRec' import ./modules);
 
   environment = {
-    systemPackages = with pkgs; lib.flatten [
-      (lib.optional (!config.modules.editors.nvim.enable) neovim)
-      wget
-      git
-      hyfetch # this is 100% always necessary trust me
-      unzip
-      ripgrep
-      file
-    ];
+    systemPackages = with pkgs;
+      lib.flatten [
+        (lib.optional (!config.modules.editors.nvim.enable) neovim)
+        wget
+        git
+        unzip
+        file
+      ];
   };
 
   env = {

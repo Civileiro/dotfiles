@@ -13,7 +13,6 @@
       zsh.enable = true;
       git.enable = true;
       tmux.enable = true;
-      utils = { btop.enable = true; };
     };
     editors = {
       default = "nvim";
