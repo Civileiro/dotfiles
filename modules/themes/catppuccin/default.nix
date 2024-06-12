@@ -37,7 +37,7 @@ in {
       };
       services.displayManager.sddm.theme = "catppuccin-${cfg.flavour}";
       environment.systemPackages = with pkgs;
-        [ (catppuccin-sddm.override { flavour = cfg.flavour; }) ];
+        [ (catppuccin-sddm.override { flavor = cfg.flavour; }) ];
     })
     (mkIf config.modules.editors.nvim.enable {
       modules.editors.nvim = {

@@ -28,15 +28,14 @@ in {
 
     environment = {
       systemPackages = with pkgs; [
-        sddm
-        libsForQt5.ark
-        libsForQt5.filelight
-        libsForQt5.ffmpegthumbs
+        kdePackages.ark
+        kdePackages.filelight
+        kdePackages.ffmpegthumbs
         wineWowPackages.stable
         wl-clipboard
       ];
       plasma6 = {
-        excludePackages = with pkgs.libsForQt5; [
+        excludePackages = with pkgs.kdePackages; [
           elisa
           gwenview
           okular
