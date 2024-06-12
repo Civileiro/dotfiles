@@ -29,6 +29,10 @@ in {
         };
       };
 
+      # fix for kernel 6.9 + wayland
+      # https://www.reddit.com/r/NixOS/comments/1curi05/wayland_not_working_on_kernel_690/
+      boot.kernelParams = [ "nvidia-drm.fbdev=1" ];
+
       services.xserver.videoDrivers = [ "nvidia" ];
       user.extraGroups = [ "video" ];
 
