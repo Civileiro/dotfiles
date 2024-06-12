@@ -25,7 +25,7 @@ in {
           (optional cfg.lsp.enable ruff-lsp)
         ])))
       (mkIf cfg.linter.enable ruff)
-      (mkIf cfg.lsp.enable nodePackages.pyright)
+      (mkIf cfg.lsp.enable pyright)
     ];
   };
 }
