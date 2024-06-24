@@ -9,7 +9,6 @@ in {
   options.modules.desktop.apps = {
     vscode.enable = mkEnableOption "VSCode";
     discord.enable = mkEnableOption "Discord";
-    obs.enable = mkEnableOption "OBS Studio";
     mangohud.enable = mkEnableOption "MangoHUD";
   };
 
@@ -17,7 +16,6 @@ in {
     user.packages = with pkgs; [
       (mkIf cfg.vscode.enable vscode)
       (mkIf cfg.discord.enable discord)
-      (mkIf cfg.obs.enable obs-studio)
       (mkIf cfg.mangohud.enable mangohud)
     ];
   };
