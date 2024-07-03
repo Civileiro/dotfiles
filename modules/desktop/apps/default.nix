@@ -15,7 +15,7 @@ in {
   config = {
     user.packages = with pkgs; [
       (mkIf cfg.vscode.enable vscode)
-      (mkIf cfg.discord.enable discord)
+      (mkIf cfg.discord.enable vesktop)
       (mkIf cfg.mangohud.enable mangohud)
     ];
   };
