@@ -5,7 +5,7 @@ in {
   options.modules.desktop.apps.obs = { enable = mkEnableOption "OBS Studio"; };
 
   config = mkIf cfg.enable {
-    user.packages = with pkgs; [ obs-studio ];
+    user.packages = with pkgs; [ obs-studio ffmpeg ];
     boot = {
       extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
       extraModprobeConfig = ''
