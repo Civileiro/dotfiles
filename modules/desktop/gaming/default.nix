@@ -5,9 +5,10 @@ in {
 
   options.modules.desktop.gaming = { };
 
-  config = {
+  config = lib.mkIf (my.anySubmoduleEnabled cfg) {
     # enable gamemode if we have any other gaming thing
-    programs.gamemode.enable = my.anySubmoduleEnabled cfg;
+    programs.gamemode.enable = true;
+    user.extraGroups = [ "gamemode" ];
   };
 
 }
