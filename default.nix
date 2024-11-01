@@ -60,7 +60,7 @@ in {
   };
 
   nix = {
-    package = pkgs.nixFlakes;
+    package = pkgs.nixVersions.stable;
 
     registry.nixpkgs.flake = inputs.nixpkgs;
 

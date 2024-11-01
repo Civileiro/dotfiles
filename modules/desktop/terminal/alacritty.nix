@@ -32,7 +32,7 @@ in {
         alacrittyModules = unique ([ defaultConfig ] ++ cfg.configImports);
         quote = str: ''"${str}"'';
         modulePaths = concatMapStringsSep ", " quote alacrittyModules;
-      in "import = [ ${modulePaths} ]";
+      in "general.import = [ ${modulePaths} ]";
     };
 
   };
