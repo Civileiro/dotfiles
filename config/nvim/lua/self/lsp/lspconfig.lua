@@ -19,14 +19,18 @@ lspconfig["lua_ls"].setup({
 lspconfig["pyright"].setup({
   capabilities = capabilities,
   settings = {
+    pyright = {
+      disableOrganizeImports = true, -- Using Ruff
+    },
     python = {
       analysis = {
-        typeCheckingMode = "off",
-      }
-    }
+        ignore = { '*' },         -- Using Ruff
+        typeCheckingMode = 'off', -- Using mypy
+      },
+    },
   },
 })
-lspconfig["ruff_lsp"].setup({
+lspconfig["ruff"].setup({
   on_attach = function(client)
     client.server_capabilities.hoverProvider = false
   end,
