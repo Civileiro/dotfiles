@@ -18,9 +18,10 @@ in {
     {
       hardware = {
         nvidia = {
-          package = config.boot.kernelPackages.nvidiaPackages.production;
+          package = config.boot.kernelPackages.nvidiaPackages.stable;
           modesetting.enable = true;
           forceFullCompositionPipeline = true;
+          open = true;
         };
         graphics = {
           enable = true;
@@ -30,7 +31,7 @@ in {
 
       # fix for kernel 6.9 + wayland
       # https://www.reddit.com/r/NixOS/comments/1curi05/wayland_not_working_on_kernel_690/
-      boot.kernelParams = [ "nvidia-drm.fbdev=1" ];
+      boot.kernelParams = [ "nvidia-drm.fbdev=1" "acpi_backlight=video" ];
 
       services.xserver.videoDrivers = [ "nvidia" ];
       user.extraGroups = [ "video" ];
