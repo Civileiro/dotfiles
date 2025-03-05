@@ -22,8 +22,8 @@ in {
       (mkIf cfg.nomacs.enable nomacs)
       (mkIf cfg.vlc.enable vlc)
       (mkIf cfg.mpv.enable mpv)
-      (mkIf cfg.kate.enable kate)
-      (mkIf cfg.kdenlive.enable kdenlive)
+      (mkIf cfg.kate.enable kdePackages.kate)
+      (mkIf cfg.kdenlive.enable kdePackages.kdenlive)
     ];
   };
 
