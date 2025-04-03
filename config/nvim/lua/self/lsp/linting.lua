@@ -1,5 +1,9 @@
 -- lsp/lint.lua
 
-require("lint").linters_by_ft = {
+local lint = require("lint")
+
+lint.linters_by_ft = {
   python = { "mypy" },
 }
+
+table.insert(lint.linters.mypy.args, "--cache-dir=.mypy_cache/.lint")
