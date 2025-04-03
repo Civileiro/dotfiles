@@ -39,6 +39,7 @@ in {
           font-awesome # Icons
           corefonts # MS
           nerd-fonts.fira-code
+          noto-fonts-color-emoji
         ];
       };
     }

@@ -4,6 +4,7 @@ let
   cfg = config.modules.editors.nvim;
   devCfg = config.modules.dev;
   shellCfg = config.modules.shell;
+  terminalCfg = config.modules.desktop.terminal;
 in {
   options.modules.editors.nvim = with types; {
     enable = mkEnableOption "Neovim";
@@ -63,6 +64,7 @@ in {
         (optional devCfg.haskell.enable haskell-tools-nvim)
         (optional devCfg.rust.enable rust-tools-nvim)
         (optional shellCfg.tmux.enable vim-tmux-navigator) # tmux integration
+        # (optional terminalCfg.kitty.enable vim-kitty-navigator) # handled in kitty config
       ];
 
     # extend plugin list with dependencies

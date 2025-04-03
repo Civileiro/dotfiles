@@ -60,8 +60,8 @@
         kdenlive.enable = true;
       };
       terminal = {
-        default = "alacritty";
-        alacritty = {
+        default = "kitty";
+        kitty = {
           enable = true;
           fontsize = 14;
         };

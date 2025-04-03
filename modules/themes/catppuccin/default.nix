@@ -67,5 +67,15 @@ in {
         };
       in [ (catppuccin-alacritty + "/catppuccin-${cfg.flavour}.toml") ];
     })
+    (mkIf config.modules.desktop.terminal.kitty.enable {
+      modules.desktop.terminal.kitty.configImports = let
+        catppuccin-kitty = pkgs.fetchFromGitHub {
+          owner = "catppuccin";
+          repo = "kitty";
+          rev = "b14e8385c827f2d41660b71c7fec1e92bdcf2676";
+          hash = "sha256-59ON7CzVgfZUo7F81qQZQ1r6kpcjR3OPvTl99gzDP8E=";
+        };
+      in [ (catppuccin-kitty + "/themes/${cfg.flavour}.conf") ];
+    })
   ]);
 }

@@ -6,6 +6,7 @@ if vim.g.theme == "catppuccin" then
     integrations = {
       harpoon = true,
     },
+    kitty = vim.env.TERM == "xterm-kitty",
   })
 
   vim.cmd.colorscheme("catppuccin")
