@@ -102,16 +102,16 @@ if has_rust then
       capabilities = capabilities,
       settings = {
         ["rust-analyzer"] = vim.tbl_deep_extend(
-        "force",
-        {
-          -- Defaults
-          check = { command = check_cmd, },
-        },
+          "force",
+          {
+            -- Defaults
+            check = { command = check_cmd, },
+          },
           -- Project config
-        get_project_rustanalyzer_settings(),
-        {
-          -- Overrides
-        }),
+          get_project_rustanalyzer_settings(),
+          {
+            -- Overrides
+          }),
       },
     }
   })
