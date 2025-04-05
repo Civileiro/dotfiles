@@ -49,6 +49,8 @@ in {
             map ctrl+alt+7 goto_tab 7
             map ctrl+alt+8 goto_tab 8
             map ctrl+alt+9 goto_tab 9
+
+            map kitty_mod+enter launch --cwd=current
           '';
           modules = unique ([ defaultConfig ] ++ cfg.configImports);
           include = str: "include ${str}";
