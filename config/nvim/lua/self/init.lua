@@ -25,4 +25,4 @@ require("self.neoscroll")
 require("self.scrollbar")
 require("self.treesitter")
 require("self.trouble")
-
+require("self.ufo")

@@ -28,7 +28,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.lsp.buf.format({ async = true })
     end)
     map({ "n", "v" }, "<F4>", vim.lsp.buf.code_action)
-    map("n", "<Leader><Space>", vim.lsp.buf.hover)
+    map("n", "<Leader><Space>", function()
+      local winid = require('ufo').peekFoldedLinesUnderCursor()
+      if not winid then
+        vim.lsp.buf.hover()
+      end
+    end)
     map("n", "[d", vim.diagnostic.goto_prev)
     map("n", "]d", vim.diagnostic.goto_next)
   end
