@@ -1,4 +1,4 @@
-# modules/dev/haskell.nix
+# modules/dev/java.nix
 
 { config, lib, pkgs, ... }:
 with lib;
