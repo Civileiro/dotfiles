@@ -136,3 +136,13 @@ if has_haskell then
     end
   })
 end
+
+
+-- JS
+lspconfig["ts_ls"].setup({
+  capabilities = capabilities,
+})
+lspconfig["jsonls"].setup({
+  capabilities = capabilities,
+  cmd = { "vscode-json-languageserver", "--stdio" },
+})

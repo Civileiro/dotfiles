@@ -8,6 +8,9 @@ require("formatter").setup({
     nix = {
       require("formatter.filetypes.nix").nixfmt
     },
+    json = {
+      require("formatter.filetypes.json").jq
+    },
     ["*"] = {
       require("formatter.filetypes.any").remove_trailing_whitespace
     }

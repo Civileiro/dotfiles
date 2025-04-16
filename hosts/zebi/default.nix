@@ -25,6 +25,7 @@
       cc.enable = true;
       nix.enable = true;
       haskell.enable = true;
+      js.enable = true;
     };
     services = {
       docker.enable = true;
