@@ -1,16 +1,18 @@
 -- lsp/lspconfig.lua
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
-local lspconfig = require("lspconfig")
 
 capabilities.textDocument.foldingRange = {
   dynamicRegistration = false,
   lineFoldingOnly = true,
 }
 
--- LUA
-lspconfig["lua_ls"].setup({
+vim.lsp.config("*", {
   capabilities = capabilities,
+})
+
+-- LUA
+vim.lsp.config("lua_ls", {
   settings = {
     Lua = {
       runtime = { version = "LuaJIT", },
@@ -21,8 +23,7 @@ lspconfig["lua_ls"].setup({
 })
 
 -- PYTHON
-lspconfig["pyright"].setup({
-  capabilities = capabilities,
+vim.lsp.config("pyright", {
   settings = {
     pyright = {
       disableOrganizeImports = true, -- Using Ruff
@@ -35,16 +36,14 @@ lspconfig["pyright"].setup({
     },
   },
 })
-lspconfig["ruff"].setup({
+vim.lsp.config("ruff", {
   on_attach = function(client)
     client.server_capabilities.hoverProvider = false
   end,
-  capabilities = capabilities,
 })
 
 -- C/C++
-lspconfig["clangd"].setup({
-  capabilities = capabilities,
+vim.lsp.config("clangd", {
   cmd = {
     "clangd",
     "--clang-tidy",
@@ -52,8 +51,7 @@ lspconfig["clangd"].setup({
 })
 
 -- JAVA
-lspconfig["jdtls"].setup({
-  capabilities = capabilities,
+vim.lsp.config("jdtls", {
   -- nix calls it "jdt-language-server" instead of "jdtls"
   cmd = {
     "jdt-language-server",
@@ -69,8 +67,7 @@ if vim.fn.executable("nixfmt") then
 else
   nix_format_cmd = nil
 end
-lspconfig["nil_ls"].setup({
-  capabilities = capabilities,
+vim.lsp.config("nil_ls", {
   settings = {
     ["nil"] = {
       formatting = { command = nix_format_cmd },
@@ -79,48 +76,21 @@ lspconfig["nil_ls"].setup({
 })
 
 -- RUST
-local has_rust, rt = pcall(require, "rust-tools")
-if has_rust then
-  local function get_project_rustanalyzer_settings()
-    local handle = io.open(vim.fn.resolve(vim.fn.getcwd() .. '/./.rust-analyzer.json'))
-    if not handle then
-      return {}
-    end
-    local out = handle:read("*a")
-    handle:close()
-    local config = vim.json.decode(out)
-    if type(config) == "table" then
-      return config
-    end
-    return {}
-  end
-
-
-  local check_cmd
-  if vim.fn.executable("clippy-driver") then
-    check_cmd = "clippy"
-  else
-    check_cmd = "check"
-  end
-  rt.setup({
-    server = {
-      capabilities = capabilities,
-      settings = {
-        ["rust-analyzer"] = vim.tbl_deep_extend(
-          "force",
-          {
-            -- Defaults
-            check = { command = check_cmd, },
-          },
-          -- Project config
-          get_project_rustanalyzer_settings(),
-          {
-            -- Overrides
-          }),
-      },
-    }
-  })
+local check_cmd
+if vim.fn.executable("clippy-driver") then
+  check_cmd = "clippy"
+else
+  check_cmd = "check"
 end
+vim.lsp.config("rust-analyser", {
+  server = {
+    settings = {
+      ["rust-analyzer"] = {
+        check = { command = check_cmd, },
+      },
+    },
+  }
+})
 
 -- HASKELL
 local has_haskell, ht = pcall(require, "haskell-tools.internal")
@@ -139,10 +109,14 @@ end
 
 
 -- JS
-lspconfig["ts_ls"].setup({
-  capabilities = capabilities,
+vim.lsp.config("ts_ls", {
 })
-lspconfig["jsonls"].setup({
-  capabilities = capabilities,
+vim.lsp.config("jsonls", {
   cmd = { "vscode-json-languageserver", "--stdio" },
 })
+
+for lsp, _ in pairs(vim.lsp.config._configs) do
+  if lsp ~= "*" then
+    vim.lsp.enable(lsp)
+  end
+end

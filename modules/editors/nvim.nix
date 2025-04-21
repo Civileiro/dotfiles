@@ -63,7 +63,7 @@ in {
         formatter-nvim # integrate formatters
         nvim-ufo # modern folds
         (optional devCfg.haskell.enable haskell-tools-nvim)
-        (optional devCfg.rust.enable rust-tools-nvim)
+        (optional devCfg.rust.enable rustaceanvim)
         (optional shellCfg.tmux.enable vim-tmux-navigator) # tmux integration
         # (optional terminalCfg.kitty.enable vim-kitty-navigator) # handled in kitty config
       ];
@@ -100,6 +100,7 @@ in {
         "/indent"
         "/keymap"
         "/lang"
+        "/lsp"
         "/lua"
         "/pack"
         "/parser"
