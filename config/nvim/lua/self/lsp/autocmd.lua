@@ -27,7 +27,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map({ "n", "v" }, "<F3>", function()
       vim.lsp.buf.format({ async = true })
     end)
-    map({ "n", "v" }, "<F4>", vim.lsp.buf.code_action)
+    map({ "n", "v" }, "<F4>", require("actions-preview").code_actions)
     map("n", "<Leader><Space>", function()
       local winid = require('ufo').peekFoldedLinesUnderCursor()
       if not winid then
