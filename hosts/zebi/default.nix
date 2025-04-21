@@ -49,9 +49,7 @@
       };
       gaming = {
         steam.enable = true;
-        emulators = { gba.enable = true; };
       };
-      vm = { libvirt.enable = true; };
       media = {
         krita.enable = true;
         nomacs.enable = true;
