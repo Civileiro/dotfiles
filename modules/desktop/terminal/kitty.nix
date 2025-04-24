@@ -30,10 +30,10 @@ in {
             map ctrl+right neighboring_window right
             map ctrl+up neighboring_window up
 
-            map shift+left move_window left
-            map shift+down move_window down
-            map shift+right move_window right
-            map shift+up move_window up
+            map ctrl+alt+left move_window left
+            map ctrl+alt+down move_window down
+            map ctrl+alt+right move_window right
+            map ctrl+alt+up move_window up
 
             enabled_layouts tall,fat,stack
             map ctrl+alt+\ toggle_layout tall
