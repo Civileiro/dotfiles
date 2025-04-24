@@ -22,3 +22,5 @@ vim.keymap.set("n", "N", "Nzzzv")
 -- do actions without copying
 vim.keymap.set("v", "<Leader>p", "\"_dP")
 vim.keymap.set({ "n", "v" }, "<Leader>d", "\"_d")
+
+vim.keymap.set({ "n", "v" }, "<S-Down>", "J")
