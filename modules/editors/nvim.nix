@@ -35,16 +35,8 @@ in {
         vim-fugitive
         gitsigns-nvim # git integration
         nvim-lspconfig # configuring LSP's
-        nvim-cmp # auto completion engine
-        cmp-buffer
-        cmp-path
-        cmp-cmdline
-        cmp-git # completions sources
-        cmp-nvim-lua # nvim lua config completions
-        cmp-nvim-lsp-signature-help # display function signatures
-        cmp-nvim-lsp # config cmp nvim lsp
+        blink-cmp # auto completion engine
         luasnip # snippet engine
-        cmp_luasnip # luasnip completion source
         nvim-web-devicons # pretty icons
         trouble-nvim # diagnostic pretty lister
         neo-tree-nvim # pretty file tree
@@ -76,21 +68,25 @@ in {
         ++ builtins.concatMap pluginWithDeps plugin.dependencies or [ ];
     in lib.unique (builtins.concatMap pluginWithDeps plugins);
 
-    # remove help tags
-    removeTags = map (plugin:
+    # remove help tags and other conflict resolutions
+    # we could pass ignoreCollisions to buildEnv but its
+    # better to fix conflicts manually
+    removeConflicts = map (plugin:
       plugin.overrideAttrs (prev: {
         nativeBuildInputs =
           lib.remove pkgs.vimUtils.vimGenDocHook prev.nativeBuildInputs or [ ];
         configurePhase = concatStringsSep "\n" (builtins.filter (s: s != ":") [
           prev.configurePhase or ":"
           "rm -f doc/tags"
+          # fix conflict for conform-nvim & blink-cmp
+          "rm -f doc/recipes.md"
         ]);
       }));
 
     # Merge all plugins to one pack
     mergedPlugins = pkgs.vimUtils.toVimPlugin (pkgs.buildEnv {
       name = "plugin-pack";
-      paths = removeTags allPlugins;
+      paths = removeConflicts allPlugins;
       pathsToLink = [
         # :h rtp
         "/autoload"
