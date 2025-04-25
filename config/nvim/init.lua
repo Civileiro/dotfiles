@@ -19,5 +19,15 @@ for _, dir in ipairs(vim.opt.runtimepath:get()) do
   end
 end
 
+if vim.env.PROF then
+  require("snacks.profiler").startup({
+    startup = {
+      event = "VimEnter", -- stop profiler on this event. Defaults to `VimEnter`
+      -- event = "UIEnter",
+      -- event = "VeryLazy",
+    },
+  })
+end
+
 require("settings")
 require("self")

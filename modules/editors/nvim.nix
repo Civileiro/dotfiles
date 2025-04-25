@@ -61,6 +61,11 @@ in {
         # (optional terminalCfg.kitty.enable vim-kitty-navigator) # handled in kitty config
       ];
 
+    # plugins with unresolvable conflicts
+    separatePlugins = with pkgs.vimPlugins; [
+      snacks-nvim # collection of QoL stuff
+    ];
+
     # extend plugin list with dependencies
     allPlugins = let
       pluginWithDeps = plugin:
@@ -124,7 +129,7 @@ in {
 
     # neovim wrapper config
     neovimConfig = pkgs.neovimUtils.makeNeovimConfig {
-      plugins = [ mergedPlugins ];
+      plugins = [ mergedPlugins ] ++ separatePlugins;
       viAlias = true;
       vimAlias = true;
       # don't need these
