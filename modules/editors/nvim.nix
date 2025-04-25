@@ -60,7 +60,7 @@ in {
         neoscroll-nvim # smooth scrolling
         nvim-scrollbar # fancy scrollbar
         nvim-lint # support non-lsp diagnostics
-        formatter-nvim # integrate formatters
+        conform-nvim # integrate formatters
         nvim-ufo # modern folds
         actions-preview-nvim # preview code actions
         (optional devCfg.haskell.enable haskell-tools-nvim)
