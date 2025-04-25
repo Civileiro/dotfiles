@@ -31,7 +31,6 @@ in {
         telescope-nvim # fuzzy finder
         nvim-treesitter.withAllGrammars # syntax tree builder & highlighter
         playground # show syntax tree
-        harpoon # quick select menu
         undotree # access nvim's undo tree
         vim-fugitive
         gitsigns-nvim # git integration
@@ -63,6 +62,7 @@ in {
         conform-nvim # integrate formatters
         nvim-ufo # modern folds
         actions-preview-nvim # preview code actions
+        aerial-nvim # code outline window
         (optional devCfg.haskell.enable haskell-tools-nvim)
         (optional devCfg.rust.enable rustaceanvim)
         (optional shellCfg.tmux.enable vim-tmux-navigator) # tmux integration
