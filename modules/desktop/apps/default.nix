@@ -9,14 +9,12 @@ in {
   options.modules.desktop.apps = {
     vscode.enable = mkEnableOption "VSCode";
     discord.enable = mkEnableOption "Discord";
-    mangohud.enable = mkEnableOption "MangoHUD";
   };
 
   config = {
     user.packages = with pkgs; [
       (mkIf cfg.vscode.enable vscode)
       (mkIf cfg.discord.enable vesktop)
-      (mkIf cfg.mangohud.enable mangohud)
     ];
   };
 }
