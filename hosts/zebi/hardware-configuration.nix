@@ -17,7 +17,7 @@
   modules = {
     hardware = {
       audio.enable = true;
-      nvidia.enable = true;
+      amdgpu.enable = true;
       wacom.enable = true;
       tablet.enable = true;
       fs.enable = true;
