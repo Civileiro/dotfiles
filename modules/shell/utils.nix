@@ -1,12 +1,19 @@
 { config, lib, pkgs, ... }:
 with lib;
-let cfg = config.modules.shell.utils;
+let
+  cfg = config.modules.shell.utils;
+  hwCfg = config.modules.hardware;
 in {
   options.modules.shell.utils = { enable = mkEnableOption "Shell Utils"; };
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      btop # better top
+      (if hwCfg.amdgpu.enable then
+        btop-rocm
+      else if hwCfg.nvidia.enable then
+        btop-cuda
+      else
+        btop) # better top with gpu monitoring
       bat # better cat
       eza # better ls
       fzf # GOAT
