@@ -16,8 +16,12 @@ in {
         cpu_temp
         gpu_name
         gpu_power
+        gpu_temp
+        gpu_junction_temp
+        gpu_voltage
         ram
         vram
+        fps_metrics=avg,0.01
       '';
     };
   };
