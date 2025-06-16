@@ -18,6 +18,7 @@ in {
         gpu_power
         gpu_temp
         gpu_junction_temp
+        gpu_core_clock
         gpu_voltage
         ram
         vram
