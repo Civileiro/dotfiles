@@ -12,6 +12,7 @@ in {
       amdgpu = {
         initrd.enable = true;
         opencl.enable = true;
+        overdrive.enable = true;
       };
       graphics = {
         enable = true;
@@ -22,5 +23,6 @@ in {
     services.xserver.videoDrivers = [ "amdgpu" ];
     user.extraGroups = [ "video" ];
 
+    services.lact.enable = true;
   };
 }
