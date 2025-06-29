@@ -6,6 +6,7 @@ in {
   imports = [
     inputs.home-manager.nixosModules.home-manager
     inputs.blocklist.nixosModule
+    inputs.nix-index-database.nixosModules.nix-index
   ]
   # All my personal modules
     ++ (lib.my.mapModulesRec' import ./modules);
