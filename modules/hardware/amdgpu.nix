@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 with lib;
 let cfg = config.modules.hardware.amdgpu;
 in {
@@ -18,6 +18,7 @@ in {
         enable = true;
         enable32Bit = true;
       };
+      firmware = with pkgs; [ linux-firmware ];
     };
 
     services.xserver.videoDrivers = [ "amdgpu" ];
