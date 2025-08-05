@@ -19,11 +19,13 @@ in {
         enable32Bit = true;
       };
       firmware = with pkgs; [ linux-firmware ];
+      rasdaemon.enable = true;
     };
 
     services.xserver.videoDrivers = [ "amdgpu" ];
-    user.extraGroups = [ "video" ];
+    user.extraGroups = [ "video" "corectrl" ];
 
     services.lact.enable = true;
+    programs.corectrl.enable = true;
   };
 }
