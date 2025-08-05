@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 with lib;
 let cfg = config.modules.desktop.gaming.steam;
 in {
@@ -12,6 +12,8 @@ in {
       remotePlay.openFirewall = true;
       # Open ports in the firewall for Source Dedicated Server
       dedicatedServer.openFirewall = true;
+
+      extraCompatPackages = with pkgs; [ proton-ge-bin ];
     };
   };
 
