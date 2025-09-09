@@ -9,6 +9,25 @@ in {
       type = enum [ "mocha" "frappe" "macchiato" "latte" ];
       default = "mocha";
     };
+    accent = mkOption {
+      type = enum [
+        "blue"
+        "flamingo"
+        "green"
+        "lavender"
+        "maroon"
+        "mauve"
+        "peach"
+        "pink"
+        "red"
+        "rosewater"
+        "sapphire"
+        "sky"
+        "teal"
+        "yellow"
+      ];
+      default = "teal";
+    };
   };
 
   config = mkIf (tCfg.active == "catppuccin") (mkMerge [
@@ -17,7 +36,7 @@ in {
         [
           (catppuccin-gtk.override {
             variant = cfg.flavour;
-            accents = [ "teal" ];
+            accents = [ cfg.accent ];
           })
         ];
     })
@@ -26,7 +45,7 @@ in {
         [
           (catppuccin-kde.override {
             flavour = [ cfg.flavour ];
-            accents = [ "teal" ];
+            accents = [ cfg.accent ];
             winDecStyles = [ "modern" ];
           })
         ];
@@ -35,9 +54,15 @@ in {
       services.displayManager.sddm.settings = {
         General = { InputMethod = ""; };
       };
-      services.displayManager.sddm.theme = "catppuccin-${cfg.flavour}";
+      services.displayManager.sddm.theme =
+        "catppuccin-${cfg.flavour}-${cfg.accent}";
       environment.systemPackages = with pkgs;
-        [ (catppuccin-sddm.override { flavor = cfg.flavour; }) ];
+        [
+          (catppuccin-sddm.override {
+            flavor = cfg.flavour;
+            accent = cfg.accent;
+          })
+        ];
     })
     (mkIf config.modules.editors.nvim.enable {
       modules.editors.nvim = {
