@@ -115,6 +115,9 @@ vim.lsp.config("jsonls", {
   cmd = { "vscode-json-languageserver", "--stdio" },
 })
 
+-- WGSL
+vim.lsp.config("wgsl_analyzer", {})
+
 for lsp, _ in pairs(vim.lsp.config._configs) do
   if lsp ~= "*" then
     vim.lsp.enable(lsp)

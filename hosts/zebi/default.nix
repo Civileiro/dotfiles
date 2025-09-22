@@ -22,12 +22,15 @@
     };
     dev = {
       xdg.enable = true;
+      lsp.enable = true;
+
       rust.enable = true;
       python.enable = true;
       cc.enable = true;
       nix.enable = true;
       haskell.enable = true;
       js.enable = true;
+      wgsl.enable = true;
     };
     services = {
       docker.enable = true;
