@@ -10,7 +10,9 @@ elseif vim.env.TMUX then
   prefix = "Tmux"
 end
 
-vim.keymap.set({ "n", "t" }, "<C-Up>", "<Cmd>"..prefix.."NavigateUp<CR>")
-vim.keymap.set({ "n", "t" }, "<C-Down>", "<Cmd>"..prefix.."NavigateDown<CR>")
-vim.keymap.set({ "n", "t" }, "<C-Left>", "<Cmd>"..prefix.."NavigateLeft<CR>")
-vim.keymap.set({ "n", "t" }, "<C-Right>", "<Cmd>"..prefix.."NavigateRight<CR>")
+if prefix ~= nil then
+  vim.keymap.set({ "n", "t" }, "<C-Up>", "<Cmd>" .. prefix .. "NavigateUp<CR>")
+  vim.keymap.set({ "n", "t" }, "<C-Down>", "<Cmd>" .. prefix .. "NavigateDown<CR>")
+  vim.keymap.set({ "n", "t" }, "<C-Left>", "<Cmd>" .. prefix .. "NavigateLeft<CR>")
+  vim.keymap.set({ "n", "t" }, "<C-Right>", "<Cmd>" .. prefix .. "NavigateRight<CR>")
+end
