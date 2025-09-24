@@ -4,6 +4,8 @@
   # Configure console keymap
   console.keyMap = "br-abnt2";
 
+  system.stateVersion = "25.05";
+
   modules = {
     theme = {
       active = "catppuccin";

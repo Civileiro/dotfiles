@@ -92,6 +92,4 @@ in {
 
   # Let 'nixos-version --json' know about the Git revision of this flake
   system.configurationRevision = lib.mkIf (self ? rev) self.rev;
-
-  system.stateVersion = "22.05";
 }
