@@ -92,22 +92,6 @@ vim.lsp.config("rust-analyser", {
   }
 })
 
--- HASKELL
-local has_haskell, ht = pcall(require, "haskell-tools.internal")
-if has_haskell then
-  vim.api.nvim_create_autocmd("FileType", {
-    desc = "haskell-tools config",
-    group = vim.api.nvim_create_augroup("HaskellToolsConfig", {}),
-    pattern = { "haskell", "lhaskell", "cabal", "cabalproject" },
-    callback = function(event)
-      ht.start_or_attach()
-      local opts = { noremap = true, buffer = event.buf }
-      vim.keymap.set("n", "<Leader>cr", vim.lsp.codelens.run, opts)
-    end
-  })
-end
-
-
 -- JS
 vim.lsp.config("ts_ls", {
 })
