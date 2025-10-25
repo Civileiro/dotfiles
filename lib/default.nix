@@ -1,14 +1,10 @@
 # * Function that extends lib with any custom function we have
-{ inputs, self, system, lib, pkgs, ... }:
+lib:
 let
   inherit (lib) makeExtensible attrValues foldr;
 
-  modules = import ./modules.nix {
-    inherit lib;
-    self.attrs = import ./attrs.nix { inherit lib; };
-  };
+  modules = import ./modules.nix lib;
 
-  mylib = makeExtensible (final:
-    modules.mapModules
-    (file: import file { inherit inputs self system lib pkgs; }) ./.);
+  mylib =
+    makeExtensible (final: modules.mapModules (file: import file lib) ./.);
 in mylib.extend (final: prev: foldr (a: b: a // b) { } (attrValues prev))

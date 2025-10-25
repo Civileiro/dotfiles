@@ -1,4 +1,4 @@
-{ lib, ... }:
+lib:
 let inherit (lib) mkOption types const;
 in rec {
   mkOpt = type: default: mkOption { inherit type default; };

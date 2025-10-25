@@ -61,6 +61,8 @@ in {
     };
   };
 
+  nixpkgs.config.allowUnfree = true;
+
   nix = {
     package = pkgs.nixVersions.stable;
 

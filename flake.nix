@@ -33,22 +33,30 @@
 
       overlays = lib.attrValues (lib.my.mapModules import ./overlays)
         ++ [ fenix.overlays.default ];
-      pkgs = import nixpkgs {
-        inherit system overlays;
-        config.allowUnfree = true; # sorry Stallman
-      };
 
-      # extend lib with out own libraries in lib.my
-      lib = nixpkgs.lib.extend (final: prev: {
-        my = import ./lib {
-          inherit inputs system pkgs;
-          self = self // additionalSelf;
-          lib = final;
+      # extend lib with my own libraries in lib.my
+      lib = nixpkgs.lib.extend (final: prev: { my = import ./lib final; });
+
+      mkHost = hostPath:
+        lib.nixosSystem {
+          inherit system;
+          specialArgs = {
+            inherit inputs lib;
+            self = self // additionalSelf;
+          };
+          modules = [
+            {
+              nixpkgs.overlays = overlays;
+              networking.hostName = lib.mkDefault
+                (lib.removeSuffix ".nix" (builtins.baseNameOf hostPath));
+            }
+            hostPath
+            ./.
+          ];
         };
-      });
     in {
       nixosModules = lib.my.mapModulesRec import ./modules;
 
-      nixosConfigurations = lib.my.mapModules lib.my.mkHost ./hosts;
+      nixosConfigurations = lib.my.mapModules mkHost ./hosts;
     };
 }

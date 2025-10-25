@@ -1,4 +1,4 @@
-{ lib, ... }:
+lib:
 let
   inherit (builtins) any isAttrs;
   inherit (lib) mapAttrsToList count id;

@@ -1,4 +1,4 @@
-{ lib, ... }:
+lib:
 let
   inherit (builtins) readDir pathExists baseNameOf isString;
   inherit (lib)
@@ -50,7 +50,6 @@ in rec {
   # Apply a function to every module in a directory
   # and sub-directories recursively
   mapModulesRec' = fn: dir: map fn (collect isString (mapModulesRec id dir));
-
 
   anySubmoduleEnabled = lib.my.anyAttrsRec (n: v: n == "enable" && v == true);
 }
