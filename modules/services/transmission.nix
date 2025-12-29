@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 with lib;
 let cfg = config.modules.services.transmission;
 in {
@@ -10,6 +10,7 @@ in {
   config = mkIf cfg.enable {
     services.transmission = {
       enable = true;
+      package = pkgs.transmission_4;
       home = cfg.folder;
       openFirewall = true;
       downloadDirPermissions = "770";
