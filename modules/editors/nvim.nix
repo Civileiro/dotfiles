@@ -30,7 +30,6 @@ in {
       cfg.extraPlugins ++ lib.flatten [
         telescope-nvim # fuzzy finder
         nvim-treesitter.withAllGrammars # syntax tree builder & highlighter
-        playground # show syntax tree
         undotree # access nvim's undo tree
         vim-fugitive
         gitsigns-nvim # git integration
