@@ -2,8 +2,10 @@
 
 { config, lib, ... }:
 with lib;
-let cfg = config.modules.services.networkmanager;
-in {
+let
+  cfg = config.modules.services.networkmanager;
+in
+{
   options.modules.services.networkmanager = {
     enable = mkEnableOption "Network Manager";
   };

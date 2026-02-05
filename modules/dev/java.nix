@@ -1,11 +1,17 @@
 # modules/dev/java.nix
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 let
   devCfg = config.modules.dev;
   cfg = devCfg.java;
-in {
+in
+{
   options.modules.dev.java = {
     enable = mkEnableOption "Java";
     install = my.mkBoolOpt false;

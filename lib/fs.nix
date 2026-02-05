@@ -1,5 +1,6 @@
 lib:
 with builtins;
-with lib; {
+with lib;
+{
   readDirNames = dir: filter (n: !hasPrefix "_" n) (attrNames (readDir dir));
 }

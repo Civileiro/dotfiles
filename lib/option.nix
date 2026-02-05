@@ -1,19 +1,24 @@
 lib:
-let inherit (lib) mkOption types const;
-in rec {
+let
+  inherit (lib) mkOption types const;
+in
+rec {
   mkOpt = type: default: mkOption { inherit type default; };
 
-  mkOpt' = type: default: description:
+  mkOpt' =
+    type: default: description:
     mkOption { inherit type default description; };
 
-  mkConst = type: value:
+  mkConst =
+    type: value:
     mkOption {
       inherit type;
       default = value;
       apply = const value;
     };
 
-  mkBoolOpt = default:
+  mkBoolOpt =
+    default:
     mkOption {
       inherit default;
       type = types.bool;

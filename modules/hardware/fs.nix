@@ -1,7 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.modules.hardware.fs;
-in {
+let
+  cfg = config.modules.hardware.fs;
+in
+{
   options.modules.hardware.fs = {
     enable = mkEnableOption "Filesystem Support";
   };

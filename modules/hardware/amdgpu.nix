@@ -1,7 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.modules.hardware.amdgpu;
-in {
+let
+  cfg = config.modules.hardware.amdgpu;
+in
+{
 
   options.modules.hardware.amdgpu = {
     enable = mkEnableOption "Radeon drivers";

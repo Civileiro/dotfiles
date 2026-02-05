@@ -1,9 +1,16 @@
 # modules/desktop/media/documents.nix
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.modules.desktop.media.libreoffice;
-in {
+let
+  cfg = config.modules.desktop.media.libreoffice;
+in
+{
 
   options.modules.desktop.media.libreoffice = {
     enable = mkEnableOption "LibreOffice";

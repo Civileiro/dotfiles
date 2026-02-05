@@ -23,7 +23,13 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, fenix, ... }:
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      fenix,
+      ...
+    }:
     let
       system = "x86_64-linux";
       additionalSelf = {
@@ -31,13 +37,13 @@
         root = ./.;
       };
 
-      overlays = lib.attrValues (lib.my.mapModules import ./overlays)
-        ++ [ fenix.overlays.default ];
+      overlays = lib.attrValues (lib.my.mapModules import ./overlays) ++ [ fenix.overlays.default ];
 
       # extend lib with my own libraries in lib.my
       lib = nixpkgs.lib.extend (final: prev: { my = import ./lib final; });
 
-      mkHost = hostPath:
+      mkHost =
+        hostPath:
         lib.nixosSystem {
           inherit system;
           specialArgs = {
@@ -47,8 +53,7 @@
           modules = [
             {
               nixpkgs.overlays = overlays;
-              networking.hostName = lib.mkDefault
-                (lib.removeSuffix ".nix" (builtins.baseNameOf hostPath));
+              networking.hostName = lib.mkDefault (lib.removeSuffix ".nix" (builtins.baseNameOf hostPath));
             }
             inputs.home-manager.nixosModules.home-manager
             inputs.blocklist.nixosModule
@@ -56,9 +61,10 @@
             hostPath
           ]
           # All my personal modules
-            ++ (lib.my.mapModulesRec' import ./modules);
+          ++ (lib.my.mapModulesRec' import ./modules);
         };
-    in {
+    in
+    {
       nixosModules = lib.my.mapModulesRec import ./modules;
 
       nixosConfigurations = lib.my.mapModules mkHost ./hosts;

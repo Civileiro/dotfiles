@@ -1,6 +1,7 @@
 { lib, ... }:
 
-with lib; {
+with lib;
+{
   options.modules.dev = {
     lsp.enable = mkEnableOption "LSP";
     formatter.enable = mkEnableOption "Formatters";

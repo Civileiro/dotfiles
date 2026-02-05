@@ -1,5 +1,12 @@
-{ self, config, options, lib, ... }:
-with lib; {
+{
+  self,
+  config,
+  options,
+  lib,
+  ...
+}:
+with lib;
+{
   options = with types; {
     # Alias for users.users.${config.user.name}
     user = my.mkOpt attrs { };
@@ -19,17 +26,14 @@ with lib; {
       path = my.mkConst str config.user.home;
       config = {
         file = my.mkOpt' attrs { } "Files to place in $XDG_CONFIG_HOME";
-        path = my.mkConst str
-          config.home-manager.users.${config.user.name}.xdg.configHome;
+        path = my.mkConst str config.home-manager.users.${config.user.name}.xdg.configHome;
       };
       data = {
         file = my.mkOpt' attrs { } "Files to place in $XDG_DATA_HOME";
-        path = my.mkConst str
-          config.home-manager.users.${config.user.name}.xdg.dataHome;
+        path = my.mkConst str config.home-manager.users.${config.user.name}.xdg.dataHome;
       };
       cache = {
-        path = my.mkConst str
-          config.home-manager.users.${config.user.name}.xdg.cacheHome;
+        path = my.mkConst str config.home-manager.users.${config.user.name}.xdg.cacheHome;
       };
     };
 
@@ -40,18 +44,25 @@ with lib; {
   };
 
   config = {
-    user = let
-      name = assert lib.assertMsg (!elem self.user [ "" "root" ])
-        "user cannot be empty or root";
-        self.user;
-    in {
-      inherit name;
-      description = name;
-      isNormalUser = true;
-      home = "/home/${name}";
-      extraGroups = [ "wheel" ];
-      uid = 1000;
-    };
+    user =
+      let
+        name =
+          assert lib.assertMsg (
+            !elem self.user [
+              ""
+              "root"
+            ]
+          ) "user cannot be empty or root";
+          self.user;
+      in
+      {
+        inherit name;
+        description = name;
+        isNormalUser = true;
+        home = "/home/${name}";
+        extraGroups = [ "wheel" ];
+        uid = 1000;
+      };
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
@@ -79,15 +90,25 @@ with lib; {
 
     users.users.${config.user.name} = mkAliasDefinitions options.user;
 
-    nix.settings = let users = [ "root" config.user.name ];
-    in {
-      trusted-users = users;
-      allowed-users = users;
-    };
+    nix.settings =
+      let
+        users = [
+          "root"
+          config.user.name
+        ];
+      in
+      {
+        trusted-users = users;
+        allowed-users = users;
+      };
 
     # must already begin with pre-existing PATH. Also, can't use binDir here,
     # because it contains a nix store path.
-    env.PATH = [ "$DOTFILES_BIN" "$XDG_BIN_HOME" "$PATH" ];
+    env.PATH = [
+      "$DOTFILES_BIN"
+      "$XDG_BIN_HOME"
+      "$PATH"
+    ];
 
     environment.sessionVariables = mkAliasDefinitions options.env;
   };

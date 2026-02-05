@@ -1,7 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.modules.shell.zsh;
-in {
+let
+  cfg = config.modules.shell.zsh;
+in
+{
   options.modules.shell.zsh = {
     enable = mkEnableOption "ZSH";
     pluginInit = my.mkOpt types.lines "";
@@ -28,13 +35,12 @@ in {
 
     user = {
       shell = pkgs.zsh;
-      packages = with pkgs;
-        [
-          # completions for some random commands
-          zsh-completions
-          # most other plugins dont need to be here
-          # they just need to be sourced in rc
-        ];
+      packages = with pkgs; [
+        # completions for some random commands
+        zsh-completions
+        # most other plugins dont need to be here
+        # they just need to be sourced in rc
+      ];
     };
 
     modules.shell = {

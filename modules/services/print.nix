@@ -1,7 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.modules.services.print;
-in {
+let
+  cfg = config.modules.services.print;
+in
+{
   options.modules.services.print = {
     enable = mkEnableOption "Printer Drivers";
   };
@@ -16,6 +23,9 @@ in {
     # for an USB printer
     services.ipp-usb.enable = true;
 
-    services.printing.drivers = [ pkgs.gutenprint pkgs.hplip ];
+    services.printing.drivers = [
+      pkgs.gutenprint
+      pkgs.hplip
+    ];
   };
 }

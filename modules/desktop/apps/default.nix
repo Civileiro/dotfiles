@@ -2,10 +2,17 @@
 
 # All simple single package apps here
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.modules.desktop.apps;
-in {
+let
+  cfg = config.modules.desktop.apps;
+in
+{
   options.modules.desktop.apps = {
     vscode.enable = mkEnableOption "VSCode";
     discord.enable = mkEnableOption "Discord";

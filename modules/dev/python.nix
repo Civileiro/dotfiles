@@ -1,11 +1,17 @@
 # modules/dev/python.nix
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 let
   devCfg = config.modules.dev;
   cfg = devCfg.python;
-in {
+in
+{
   options.modules.dev.python = {
     enable = mkEnableOption "Python";
     install = my.mkBoolOpt true;
@@ -16,13 +22,17 @@ in {
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      (mkIf cfg.install (python3.withPackages (ps:
-        with ps;
-        flatten [
-          virtualenv
-          (optional cfg.linter.enable mypy)
-          (optional cfg.formatter.enable black)
-        ])))
+      (mkIf cfg.install (
+        python3.withPackages (
+          ps:
+          with ps;
+          flatten [
+            virtualenv
+            (optional cfg.linter.enable mypy)
+            (optional cfg.formatter.enable black)
+          ]
+        )
+      ))
       (mkIf (cfg.linter.enable || cfg.lsp.enable) ruff)
       (mkIf cfg.lsp.enable pyright)
     ];

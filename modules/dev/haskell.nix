@@ -1,11 +1,17 @@
 # modules/dev/haskell.nix
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 let
   devCfg = config.modules.dev;
   cfg = devCfg.haskell;
-in {
+in
+{
   options.modules.dev.haskell = {
     enable = mkEnableOption "Haskell";
     install = my.mkBoolOpt false;

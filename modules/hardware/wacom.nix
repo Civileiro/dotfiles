@@ -1,8 +1,12 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.modules.hardware.wacom;
-in {
-  options.modules.hardware.wacom = { enable = mkEnableOption "Wacom drivers"; };
+let
+  cfg = config.modules.hardware.wacom;
+in
+{
+  options.modules.hardware.wacom = {
+    enable = mkEnableOption "Wacom drivers";
+  };
 
   config = mkIf cfg.enable {
     # For my intuos4 pro. Doesn't work for cintiqs.

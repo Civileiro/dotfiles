@@ -1,15 +1,21 @@
 # modules/dev/cc.nix --- C & C++
 #
-# I liked C. I loved C++(17+). 
+# I liked C. I loved C++(17+).
 # Even after rust replaced it as my favorite language
 # it still has a place in my heart
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 let
   devCfg = config.modules.dev;
   cfg = devCfg.cc;
-in {
+in
+{
   options.modules.dev.cc = {
     enable = mkEnableOption "C/C++";
     install = my.mkBoolOpt false;
@@ -19,7 +25,8 @@ in {
   };
 
   config = mkIf cfg.enable {
-    user.packages = with pkgs;
+    user.packages =
+      with pkgs;
       builtins.map (mkIf cfg.install) [
         clang
         gcc
@@ -28,9 +35,9 @@ in {
         cmake
         gnumake
         llvmPackages.libcxx
-      ] ++ [
-        (mkIf (cfg.lsp.enable || cfg.formatter.enable || cfg.linter.enable)
-          clang-tools)
+      ]
+      ++ [
+        (mkIf (cfg.lsp.enable || cfg.formatter.enable || cfg.linter.enable) clang-tools)
       ];
   };
 }

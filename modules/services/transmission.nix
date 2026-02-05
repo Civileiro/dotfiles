@@ -1,7 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.modules.services.transmission;
-in {
+let
+  cfg = config.modules.services.transmission;
+in
+{
   options.modules.services.transmission = {
     enable = mkEnableOption "Transmission";
     folder = my.mkOpt types.path "${config.user.home}/torrents";

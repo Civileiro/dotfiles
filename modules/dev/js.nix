@@ -1,11 +1,17 @@
 # modules/dev/js.nix
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 let
   devCfg = config.modules.dev;
   cfg = devCfg.js;
-in {
+in
+{
   options.modules.dev.js = {
     enable = mkEnableOption "JavaScript";
     install = my.mkBoolOpt false;

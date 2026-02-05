@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   imports = [ (import ./hardware-configuration.nix) ];
 
   # Configure console keymap
@@ -33,13 +34,19 @@
     };
     desktop = {
       plasma.enable = true;
-      apps = { discord.enable = true; };
+      apps = {
+        discord.enable = true;
+      };
       browsers = {
         default = "firefox";
         firefox.enable = true;
       };
-      gaming = { steam.enable = true; };
-      vm = { libvirt.enable = true; };
+      gaming = {
+        steam.enable = true;
+      };
+      vm = {
+        libvirt.enable = true;
+      };
       media = {
         nomacs.enable = true;
         mpv.enable = true;

@@ -1,4 +1,5 @@
-{ config, ... }: {
+{ config, ... }:
+{
   imports = [ (import ./hardware-configuration.nix) ];
 
   # Configure console keymap

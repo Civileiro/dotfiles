@@ -1,11 +1,17 @@
 # modules/dev/wgsl.nix
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 let
   devCfg = config.modules.dev;
   cfg = devCfg.wgsl;
-in {
+in
+{
   options.modules.dev.wgsl = {
     enable = mkEnableOption "WGSL";
     lsp.enable = my.mkBoolOpt devCfg.lsp.enable;

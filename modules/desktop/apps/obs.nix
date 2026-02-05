@@ -1,11 +1,23 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.modules.desktop.apps.obs;
-in {
-  options.modules.desktop.apps.obs = { enable = mkEnableOption "OBS Studio"; };
+let
+  cfg = config.modules.desktop.apps.obs;
+in
+{
+  options.modules.desktop.apps.obs = {
+    enable = mkEnableOption "OBS Studio";
+  };
 
   config = mkIf cfg.enable {
-    user.packages = with pkgs; [ obs-studio ffmpeg ];
+    user.packages = with pkgs; [
+      obs-studio
+      ffmpeg
+    ];
     boot = {
       extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
       extraModprobeConfig = ''

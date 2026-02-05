@@ -1,7 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.modules.desktop.gaming.emulators;
-in {
+let
+  cfg = config.modules.desktop.gaming.emulators;
+in
+{
   options.modules.desktop.gaming.emulators = {
     # psx.enable = mkEnableOption "Playstation Emulator";
     # ds.enable = mkEnableOption "Nintendo DS Emulator";

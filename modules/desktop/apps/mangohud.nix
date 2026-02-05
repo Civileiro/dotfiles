@@ -1,7 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.modules.desktop.apps.mangohud;
-in {
+let
+  cfg = config.modules.desktop.apps.mangohud;
+in
+{
   options.modules.desktop.apps.mangohud = {
     enable = mkEnableOption "MangoHud";
   };

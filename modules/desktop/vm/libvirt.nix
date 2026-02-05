@@ -1,7 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.modules.desktop.vm.libvirt;
-in {
+let
+  cfg = config.modules.desktop.vm.libvirt;
+in
+{
   options.modules.desktop.vm.libvirt = {
     enable = mkEnableOption "Virt-manager";
   };

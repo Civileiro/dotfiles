@@ -1,7 +1,9 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.modules.hardware.zenpower;
-in {
+let
+  cfg = config.modules.hardware.zenpower;
+in
+{
   options.modules.hardware.zenpower = {
     enable = mkEnableOption "Zenpower module";
   };

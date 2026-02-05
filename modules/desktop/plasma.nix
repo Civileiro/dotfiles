@@ -1,9 +1,18 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-let cfg = config.modules.desktop.plasma;
-in {
+let
+  cfg = config.modules.desktop.plasma;
+in
+{
 
-  options.modules.desktop.plasma = { enable = mkEnableOption "KDE Plasma"; };
+  options.modules.desktop.plasma = {
+    enable = mkEnableOption "KDE Plasma";
+  };
 
   config = mkIf cfg.enable {
 

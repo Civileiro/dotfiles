@@ -1,8 +1,15 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 with lib;
-let cfg = config.modules.desktop;
-in {
+let
+  cfg = config.modules.desktop;
+in
+{
   options.modules.desktop = with types; {
     enable = mkEnableOption "Desktop Environment";
     x.enable = mkEnableOption "X";
@@ -14,8 +21,7 @@ in {
       assertions = [
         {
           assertion = length cfg.de < 2;
-          message =
-            "Can't have more than one desktop environment enabled at a time";
+          message = "Can't have more than one desktop environment enabled at a time";
         }
         {
           assertion = !(length cfg.de == 0 && my.anySubmoduleEnabled cfg);
@@ -55,6 +61,10 @@ in {
         };
       };
     })
-    (mkIf cfg.wayland.enable { env = { NIXOS_OZONE_WL = "1"; }; })
+    (mkIf cfg.wayland.enable {
+      env = {
+        NIXOS_OZONE_WL = "1";
+      };
+    })
   ];
 }

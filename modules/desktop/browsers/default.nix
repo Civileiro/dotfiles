@@ -1,8 +1,10 @@
 { config, lib, ... }:
 
 with lib;
-let cfg = config.modules.desktop.browsers;
-in {
+let
+  cfg = config.modules.desktop.browsers;
+in
+{
   options.modules.desktop.browsers = {
     default = my.mkOpt (with types; nullOr str) null;
   };

@@ -1,7 +1,9 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.modules.desktop.gaming;
-in {
+let
+  cfg = config.modules.desktop.gaming;
+in
+{
 
   options.modules.desktop.gaming = { };
 

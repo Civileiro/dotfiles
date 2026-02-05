@@ -1,11 +1,17 @@
 # modules/dev/nix.nix
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 let
   devCfg = config.modules.dev;
   cfg = devCfg.nix;
-in {
+in
+{
   options.modules.dev.nix = {
     enable = mkEnableOption "Nix Dev";
     lsp.enable = my.mkBoolOpt devCfg.lsp.enable;

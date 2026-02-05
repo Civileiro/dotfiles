@@ -5,6 +5,6 @@ let
 
   modules = import ./modules.nix lib;
 
-  mylib =
-    makeExtensible (final: modules.mapModules (file: import file lib) ./.);
-in mylib.extend (final: prev: foldr (a: b: a // b) { } (attrValues prev))
+  mylib = makeExtensible (final: modules.mapModules (file: import file lib) ./.);
+in
+mylib.extend (final: prev: foldr (a: b: a // b) { } (attrValues prev))

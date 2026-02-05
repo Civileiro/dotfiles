@@ -1,10 +1,19 @@
-{ inputs, self, config, lib, pkgs, ... }:
+{
+  inputs,
+  self,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   base = "/etc/nixpkgs/channels";
   nixpkgsPath = "${base}/nixpkgs";
-in {
+in
+{
   environment = {
-    systemPackages = with pkgs;
+    systemPackages =
+      with pkgs;
       lib.flatten [
         (lib.optional (!config.modules.editors.nvim.enable) neovim)
         wget
@@ -66,7 +75,10 @@ in {
     ];
     settings = {
       auto-optimise-store = true;
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
       download-buffer-size = 524288000; # 500MB
     };
   };
@@ -76,18 +88,18 @@ in {
     ProcessSizeMax=0
   '';
 
-  systemd.tmpfiles.rules =
-    [ "L+ ${nixpkgsPath}     - - - - ${inputs.nixpkgs}" ];
+  systemd.tmpfiles.rules = [ "L+ ${nixpkgsPath}     - - - - ${inputs.nixpkgs}" ];
 
   # make a file with the name of all installed packages
-  environment.etc."current-packages".text = with builtins;
+  environment.etc."current-packages".text =
+    with builtins;
     let
-      packages = config.environment.systemPackages
-        ++ config.users.users.${config.user.name}.packages;
+      packages = config.environment.systemPackages ++ config.users.users.${config.user.name}.packages;
       packageNames = map (p: "${p.name}") packages;
       sortedUnique = sort lessThan (lib.unique packageNames);
       formatted = concatStringsSep "\n" sortedUnique;
-    in formatted;
+    in
+    formatted;
 
   # Let 'nixos-version --json' know about the Git revision of this flake
   system.configurationRevision = lib.mkIf (self ? rev) self.rev;
