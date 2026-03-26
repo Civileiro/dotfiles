@@ -40,7 +40,7 @@ in
         kdePackages.ark
         kdePackages.filelight
         kdePackages.ffmpegthumbs
-        wineWowPackages.stable
+        wineWow64Packages.stable
         wl-clipboard
       ];
       plasma6 = {
