@@ -23,6 +23,7 @@ in
       graphics = {
         enable = true;
         enable32Bit = true;
+        extraPackages = [ pkgs.amf ];
       };
       firmware = with pkgs; [ linux-firmware ];
       rasdaemon.enable = true;
