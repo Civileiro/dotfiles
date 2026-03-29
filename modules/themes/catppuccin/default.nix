@@ -79,7 +79,6 @@ in
         settings = {
           theme = "catppuccin";
           catppuccin_flavour = cfg.flavour;
-          lualine_theme = "catppuccin";
         };
       };
     })
