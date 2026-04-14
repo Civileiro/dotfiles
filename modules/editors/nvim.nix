@@ -9,7 +9,6 @@ let
   cfg = config.modules.editors.nvim;
   devCfg = config.modules.dev;
   shellCfg = config.modules.shell;
-  terminalCfg = config.modules.desktop.terminal;
 in
 {
   options.modules.editors.nvim = with types; {
@@ -148,7 +147,7 @@ in
       );
 
       # neovim wrapper config
-      neovimConfig = pkgs.neovimUtils.makeNeovimConfig {
+      neovimConfig = {
         plugins = [ mergedPlugins ] ++ separatePlugins;
         viAlias = true;
         vimAlias = true;

@@ -74,20 +74,15 @@ in
       in
       mkIf config.modules.editors.nvim.enable {
         modules.editors.nvim.extraPlugins = [ nav ];
-        home.config.file = {
-          "kitty/pass_keys.py".source = "${nav}/pass_keys.py";
-          "kitty/get_layout.py".source = "${nav}/get_layout.py";
-        };
         modules.desktop.terminal.kitty.configImports = [
           (pkgs.writeText "nav-mappings.conf" ''
             allow_remote_control yes
             listen_on unix:@mykitty
 
-
-            map ctrl+down  kitten pass_keys.py bottom ctrl+down
-            map ctrl+up    kitten pass_keys.py top    ctrl+up
-            map ctrl+left  kitten pass_keys.py left   ctrl+left
-            map ctrl+right kitten pass_keys.py right  ctrl+right
+            map --when-focus-on var:IS_VIM=true ctrl+down
+            map --when-focus-on var:IS_VIM=true ctrl+up
+            map --when-focus-on var:IS_VIM=true ctrl+left
+            map --when-focus-on var:IS_VIM=true ctrl+right
           '').outPath
         ];
       }

@@ -23,9 +23,8 @@ in
     user.packages = with pkgs; [
       (mkIf cfg.install nodejs)
       (mkIf cfg.install typescript)
-      (mkIf cfg.install nodePackages.npm)
-      (mkIf cfg.lsp.enable nodePackages.vscode-json-languageserver)
-      (mkIf cfg.lsp.enable nodePackages.typescript-language-server)
+      (mkIf cfg.lsp.enable vscode-json-languageserver)
+      (mkIf cfg.lsp.enable typescript-language-server)
       (mkIf cfg.formatter.enable jq)
     ];
   };
