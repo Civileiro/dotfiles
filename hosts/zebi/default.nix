@@ -5,7 +5,7 @@
   # Configure console keymap
   console.keyMap = "br-abnt2";
 
-  system.stateVersion = "22.05";
+  system.stateVersion = "25.11";
 
   modules = {
     theme = {
