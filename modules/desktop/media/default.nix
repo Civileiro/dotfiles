@@ -28,7 +28,7 @@ in
       (mkIf cfg.krita.enable krita)
       (mkIf cfg.nomacs.enable nomacs)
       (mkIf cfg.vlc.enable vlc)
-      (mkIf cfg.mpv.enable mpv)
+      (mkIf cfg.mpv.enable (mpv.override { youtubeSupport = false; }))
       (mkIf cfg.kate.enable kdePackages.kate)
       (mkIf cfg.kdenlive.enable kdePackages.kdenlive)
     ];
