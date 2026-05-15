@@ -46,6 +46,7 @@ in
           corefonts # MS
           nerd-fonts.fira-code
           noto-fonts-color-emoji
+          source-han-sans # Chinese/Japanese/Korean
         ];
       };
     }
