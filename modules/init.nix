@@ -69,11 +69,11 @@ in
 
     registry.nixpkgs.flake = inputs.nixpkgs;
 
-    nixPath = [
-      "nixpkgs=${nixpkgsPath}"
-      "/nix/var/nix/profiles/per-user/root/channels"
-    ];
     settings = {
+      nix-path = [
+        "nixpkgs=${nixpkgsPath}"
+        "/nix/var/nix/profiles/per-user/root/channels"
+      ];
       auto-optimise-store = true;
       experimental-features = [
         "nix-command"
